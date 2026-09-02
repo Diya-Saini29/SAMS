@@ -6,13 +6,14 @@ During the first week, the project proposal for the Smart Airport Management Sys
 The proposal established the overall plan and structure of the project. It included:
 
 #### Defining the higher-order goal and problem statement of the Smart Airport Management System.
+
 ### Identifying the major airport management modules, including:
-Flight Management\
-Luggage Management
-Visitor Management
-Transportation Management
-Staff Management
-Airport Dashboard
+#### Flight Management
+#### Luggage Management
+#### Visitor Management
+#### Transportation Management
+#### Staff Management
+#### Airport Dashboard
 
 #### Defining the core workflow and operational scope of the system.
 ### Planning the three-tier web architecture consisting of:
