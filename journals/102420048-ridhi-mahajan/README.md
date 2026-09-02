@@ -7,7 +7,7 @@ The proposal established the overall plan and structure of the project. It inclu
 
 #### Defining the higher-order goal and problem statement of the Smart Airport Management System.
 ### Identifying the major airport management modules, including:
-Flight Management
+Flight Management\
 Luggage Management
 Visitor Management
 Transportation Management
