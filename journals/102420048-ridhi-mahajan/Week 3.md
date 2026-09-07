@@ -2,7 +2,7 @@
 
 ## Improved the Frontend Design and User Interface
 
-### Work Completed
+### Work Completed 
 
 During the third week, the focus was on improving the overall appearance and usability of the frontend to make the **Smart Airport Management System (SAMS)** look more professional and user-friendly.
 
