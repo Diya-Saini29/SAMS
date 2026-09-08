@@ -1,0 +1,1 @@
+export default function SectionCard({title,icon:Icon,action,children,className=''}){return <section className={`section-card ${className}`}><div className="section-head"><div className="section-title">{Icon&&<Icon size={24}/>}<h2>{title}</h2></div>{action}</div>{children}</section>}
