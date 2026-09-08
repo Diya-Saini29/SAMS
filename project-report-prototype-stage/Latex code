@@ -1,1880 +1,1076 @@
-
 \documentclass[12pt,a4paper]{report}
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{geometry}
-\geometry{a4paper, margin=1in}
+% ---------------------------------------------------------
+% PACKAGES
+% ---------------------------------------------------------
+\usepackage[a4paper,margin=1in]{geometry}
 \usepackage{graphicx}
-\usepackage{longtable}
-\usepackage{booktabs}
+\usepackage{float}
 \usepackage{array}
-\usepackage{tabularx}
-\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
 \usepackage{enumitem}
-\usepackage{hyperref}
+\usepackage{setspace}
 \usepackage{titlesec}
 \usepackage{fancyhdr}
-\usepackage{xcolor}
 \usepackage{caption}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
 \usepackage{amsmath}
-\usepackage{float}
+\usepackage{amssymb}
 \usepackage{chngcntr}
 
-\setlength{\headheight}{15pt}
+% ---------------------------------------------------------
+% GENERAL FORMATTING
+% ---------------------------------------------------------
+\onehalfspacing
 
-% ============================================================
-% TABLE CAPTION FORMAT
-% ============================================================
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
 
+\titleformat{\chapter}
+  {\normalfont\bfseries\Large}
+  {\thechapter.}
+  {1em}
+  {}
+
+\titleformat{\section}
+  {\normalfont\bfseries\large}
+  {\thesection}
+  {1em}
+  {}
+
+\titleformat{\subsection}
+  {\normalfont\bfseries\normalsize}
+  {\thesubsection}
+  {1em}
+  {}
+
+% ---------------------------------------------------------
+% HEADER / FOOTER
+% ---------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Smart Airport Management System}
+\fancyhead[R]{Group 5}
+\fancyfoot[C]{\thepage}
+
+% ---------------------------------------------------------
+% TABLE NUMBERING
+% ---------------------------------------------------------
 \counterwithout{table}{chapter}
 \renewcommand{\thetable}{\Roman{table}}
 
-\captionsetup[table]{
-    labelfont={bf},
-    textfont={sc},
-    labelsep=newline,
-    justification=centering,
-    singlelinecheck=false,
-    skip=6pt
-}
+% ---------------------------------------------------------
+% FIGURE NUMBERING
+% ---------------------------------------------------------
+\counterwithout{figure}{chapter}
+\renewcommand{\thefigure}{\arabic{figure}}
 
-% ============================================================
-% HYPERREF
-% ============================================================
-
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    urlcolor=blue,
-    citecolor=blue,
-    pdftitle={SAMS - Smart Airport Management System - Software Engineering Project Report}
-}
-
-% ============================================================
-% PAGE STYLE
-% ============================================================
-
-\pagestyle{fancy}
-\fancyhf{}
-\rhead{SAMS -- Smart Airport Management System}
-\lhead{\leftmark}
-\rfoot{\thepage}
-
-% ============================================================
-% CHAPTER FORMAT
-% ============================================================
-
-\titleformat{\chapter}[display]
-{\normalfont\huge\bfseries}
-{\chaptertitlename\ \thechapter}
-{20pt}
-{\Huge}
-
-% ============================================================
-% CUSTOM COLUMN TYPES
-% ============================================================
-
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
-\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-
-% ============================================================
-% TITLE
-% ============================================================
-
-\title{
-    \vspace{-2cm}
-    \Large UCS503P -- Software Engineering Project Report \\[0.3cm]
-    \Huge \textbf{Smart Airport Management System (SAMS)} \\[0.2cm]
-    \Large Web-Based Airport Operations and Management System
-}
-
-\author{
-    Submitted by: \\[0.2cm]
-    1024240048 -- Ridhi Mahajan \\
-    1024240053 -- Priyanka \\
-    1024240057 -- Diya Saini \\
-    1024240066 -- Ishika Jain \\[0.4cm]
-    Group: 5 \\
-    BE Third Year, CSE \\[0.6cm]
-    Submitted to: \\[0.1cm]
-    Anushka Chaudary \\[0.4cm]
-    Mid-Semester Evaluation \\
-    Computer Science and Engineering Department \\
-    Thapar Institute of Engineering and Technology, Patiala
-}
-
-\date{9 September 2026}
-
-% ============================================================
+% ---------------------------------------------------------
 % DOCUMENT
-% ============================================================
-
+% ---------------------------------------------------------
 \begin{document}
 
-\maketitle
-\thispagestyle{empty}
-\newpage
+% =========================================================
+% TITLE PAGE
+% =========================================================
+\begin{titlepage}
+\centering
+
+\vspace*{1cm}
+
+{\Large \textbf{THAPAR INSTITUTE OF ENGINEERING AND TECHNOLOGY}}\\
+\vspace{0.3cm}
+{\large Patiala, Punjab}\\
+
+\vspace{1.5cm}
+
+{\Large \textbf{COMPUTER SCIENCE AND ENGINEERING DEPARTMENT}}
+
+\vspace{1.5cm}
+
+{\LARGE \textbf{SMART AIRPORT MANAGEMENT SYSTEM}}\\[0.4cm]
+{\Large \textbf{(SAMS)}}
+
+\vspace{1.2cm}
+
+{\large \textbf{Mid-Semester Evaluation}}
+
+\vspace{1.5cm}
+
+\textbf{Submitted By}
+
+\vspace{0.5cm}
+
+\begin{tabular}{ll}
+1024240048 & Ridhi Mahajan\\
+1024240053 & Priyanka\\
+1024240057 & Diya Saini\\
+1024240066 & Ishika Jain\\
+\end{tabular}
+
+\vspace{1cm}
+
+\textbf{Group 5}
+
+\vspace{1cm}
+
+\textbf{Faculty}\\
+Anushka Chaudary
+
+\vfill
+
+{\large \textbf{BE Third Year, Computer Science and Engineering}}\\
+\vspace{0.3cm}
+{\large \textbf{9 September}}
+
+\end{titlepage}
+
+% =========================================================
+% TABLE OF CONTENTS
+% =========================================================
+\pagenumbering{roman}
 
 \tableofcontents
 \listoffigures
 \listoftables
-\newpage
 
+\clearpage
+\pagenumbering{arabic}
 
-% ============================================================
+% =========================================================
 % CHAPTER 1
-% ============================================================
-
+% =========================================================
 \chapter{Project Selection Phase}
 
-\section{Software Bid}
+\section{Software Bid with Higher-Order Goal}
 
-\subsection*{Higher-Order Goal}
+The Smart Airport Management System (SAMS) is a centralized software platform designed to organize and manage major airport-related operational information through a single web-based interface.
 
-Airport operations involve multiple interconnected activities including flight management, passenger luggage handling, visitor management, staff management, and ground transportation. When these activities are handled through disconnected systems or manual records, airport personnel may face difficulties in maintaining consistent and accessible operational information.
+The system focuses on improving information accessibility, reducing fragmentation between operational categories, and providing an integrated management environment for airport activities.
 
-\textbf{Smart Airport Management System (SAMS)} is developed as a centralized web-based management system for organizing important airport operational information through a single application. The system provides authenticated users with role-based access to modules for flights, luggage, visitors, staff, and transportation.
-
-The primary goal of SAMS is to provide a structured platform through which airport-related records can be created, viewed, updated, and deleted according to the responsibilities of different users.
-
-The project is therefore not limited to the development of individual CRUD pages. Its main objective is to demonstrate how different airport-management activities can be brought together under a common software architecture. The system establishes a clear relationship between the user interface, application programming interface, authorization layer, and persistent database.
-
-From a software engineering perspective, the project also demonstrates the application of modular design principles. Rather than implementing all functionality in a single component, the system separates routes, controllers, middleware, database models, frontend pages, and authentication logic. This separation makes the prototype easier to understand and provides a foundation for future extensions.
+The higher-order goal of SAMS is to provide a structured digital platform through which authorized users can access and manage airport information efficiently.
 
 \subsection*{Time-to-Value}
 
-The development of SAMS follows a modular implementation strategy:
+SAMS is designed as a modular web application so that individual airport management functions can be accessed without requiring separate standalone systems for each category.
 
-\begin{itemize}[nosep]
-    \item \textbf{Authentication first:} User registration, login, JWT-based authentication, and protected routes establish the security foundation of the system.
-    \item \textbf{Core operational modules second:} Flight, luggage, visitor, staff, and transportation modules provide the main airport-management functionality.
-    \item \textbf{Role-based authorization:} Different operations are restricted according to user roles such as administrator, staff, airline staff, passenger, visitor, and transportation operator.
-    \item \textbf{Frontend integration:} A React-based interface communicates with the Express backend through REST APIs.
-    \item \textbf{Dashboard and reporting:} The frontend provides a centralized dashboard and dedicated management pages for viewing operational information.
-\end{itemize}
-
-This order of implementation reduces dependency between development tasks. Authentication establishes the identity of the user before protected resources are introduced. Once the common authentication mechanism is available, the operational modules can use the same middleware rather than implementing separate security mechanisms.
-
-The modular approach also makes it possible to verify the system incrementally. For example, the authentication routes can be tested independently before flight or luggage operations are introduced. Similarly, each resource module has its own route, controller, and model, allowing errors to be isolated more easily.
+The centralized interface allows the administrator to view and manage operational information from one application, thereby reducing unnecessary switching between different interfaces.
 
 \subsection*{Problem Statement}
 
-Airport management requires the coordination of multiple categories of operational data. Without a centralized system, information related to flights, luggage, visitors, staff, and transportation may become difficult to maintain and access.
+Airport operations involve several categories of information, including flight details, luggage records, visitor information, staff information, and transportation services.
 
-The major problems addressed by SAMS are:
-
-\begin{itemize}[nosep]
-    \item Airport operational records may be distributed across separate systems or manual records.
-    \item Different categories of users require different levels of access to airport information.
-    \item Flight and transportation information needs to be associated with relevant operational records.
-    \item Luggage records require tracking through identifiable luggage tags and status information.
-    \item Visitor and staff records require structured storage and controlled modification.
-    \item A centralized dashboard can provide users with a clearer overview of airport operations.
-\end{itemize}
-
-These problems have a common software requirement: operational information should be stored in a structured form and accessed through controlled application interfaces. A centralized system can also reduce duplication in data-entry processes and make it easier to retrieve information when required.
-
-Another important consideration is that not every user should have identical capabilities. An administrator may need to perform operations that are not appropriate for a passenger or visitor. Therefore, access control is treated as a backend responsibility in SAMS rather than only a visual restriction in the frontend.
+Managing these categories separately can make information difficult to access and maintain. A centralized management platform is therefore required to organize this information in a consistent and accessible manner.
 
 \subsection*{Proposed Solution}
 
-SAMS provides a centralized web application consisting of a React frontend, an Express.js backend, and a MongoDB database accessed through Mongoose.
+SAMS provides a centralized web-based management system consisting of:
 
-The system uses REST APIs to communicate between the frontend and backend. Authentication is implemented using JSON Web Tokens (JWT), while password hashing is handled using \texttt{bcryptjs}. Role-based middleware restricts access to protected operations.
-
-The major modules implemented in the system are:
-
-\begin{itemize}[nosep]
-    \item Authentication and user management
-    \item Flight management
-    \item Luggage management
-    \item Visitor management
-    \item Staff management
-    \item Transportation management
-    \item Dashboard and reports
-    \item Application settings
+\begin{itemize}
+    \item Secure user authentication.
+    \item Role-based API authorization.
+    \item Flight information management.
+    \item Luggage information management.
+    \item Visitor management.
+    \item Staff management.
+    \item Transportation management.
+    \item Dashboard-based operational overview.
+    \item Reporting and system information views.
 \end{itemize}
 
-The architecture deliberately keeps the database behind the backend API. The React application does not directly connect to MongoDB. Instead, an API request travels from the frontend to an Express route, passes through the applicable middleware, reaches the controller, and is then processed using a Mongoose model.
+The current prototype demonstration is primarily administrator-centric, while the backend architecture supports additional user roles.
 
-This approach provides a clear boundary between the presentation layer and data layer. It also makes the authorization mechanism meaningful because access to the actual database operations occurs only through the backend.
+\section{Technology Stack}
 
-\subsection*{Technology Stack}
+The project uses a modern web application architecture consisting of a React frontend, an Express.js backend, and a MongoDB database.
 
 \begin{table}[H]
 \centering
-\caption{SAMS technology stack}
-\label{tab:tech-stack}
-\begin{tabular}{L{4cm} L{9.5cm}}
+\caption{Technology Stack}
+\begin{tabular}{p{4cm}p{9cm}}
 \toprule
-\textbf{Layer} & \textbf{Technology} \\
+\textbf{Technology} & \textbf{Purpose}\\
 \midrule
-Frontend & React.js, JavaScript, HTML, CSS \\
-Frontend Build Tool & Vite \\
-Routing & React Router \\
-HTTP Client & Axios \\
-UI Components / Icons & Lucide React \\
-Charts & Recharts \\
-Backend & Node.js and Express.js \\
-Database & MongoDB \\
-Database ODM & Mongoose \\
-Authentication & JSON Web Token (JWT) \\
-Password Security & bcryptjs \\
-Configuration & dotenv \\
-Cross-Origin Requests & CORS \\
-Version Control & Git and GitHub \\
+React.js & Frontend user interface and component-based development\\
+Vite & Frontend development and build tooling\\
+React Router & Client-side routing and protected navigation\\
+Axios & Communication between frontend and backend APIs\\
+Node.js & Backend JavaScript runtime\\
+Express.js & REST API and backend server framework\\
+MongoDB & Database for persistent application data\\
+Mongoose & Object Data Modeling for MongoDB\\
+JWT & Authentication token generation and verification\\
+bcryptjs & Password hashing and credential verification\\
+Tailwind CSS & Frontend styling and responsive interface design\\
+Recharts & Dashboard and report visualizations\\
+Git/GitHub & Version control and project collaboration\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The selected technologies form a conventional full-stack JavaScript architecture. React provides component-based development on the frontend, while Node.js and Express.js provide the API layer. MongoDB provides document-oriented persistent storage and Mongoose supplies the schema and model layer required by the backend.
+\section{Evaluation Criteria}
 
-Axios is used to maintain communication between the two application layers. This is useful because authentication headers and common response handling can be managed from one location.
+The system is evaluated according to the following criteria:
 
-Vite is used as the frontend build and development tool. Its role is primarily related to the development and packaging workflow of the React application rather than application business logic.
-
-\subsection*{Evaluation Criteria}
-
-The prototype is evaluated primarily on the correctness of its core management workflows:
-
-\begin{itemize}[nosep]
-    \item Successful user registration and login.
-    \item Correct JWT-based authentication.
-    \item Correct role-based access to protected operations.
-    \item Successful creation, retrieval, updating, and deletion of operational records.
-    \item Correct communication between the React frontend and Express REST API.
-    \item Correct persistence of records in MongoDB.
-    \item Usability and consistency of the management dashboard.
+\begin{itemize}
+    \item Correctness of authentication and protected API access.
+    \item Functionality of major CRUD operations.
+    \item Correct communication between frontend and backend.
+    \item Database integration.
+    \item Role-based access control at the API level.
+    \item Usability of the centralized interface.
+    \item Maintainability and modularity of the implementation.
 \end{itemize}
 
-The evaluation therefore considers both functional correctness and architectural correctness. A page being visible in the frontend is not by itself sufficient; the corresponding backend operation must also enforce the intended access restrictions.
+\section{Scalability}
 
-\subsection*{Scalability}
+The modular architecture of SAMS allows additional airport management modules and role-specific interfaces to be incorporated without redesigning the entire system.
 
-The system follows a modular architecture in which frontend pages communicate with backend API routes rather than directly accessing the database. This separation allows individual modules to be modified without requiring the complete application to be redesigned.
+The use of REST APIs and separate frontend and backend layers also allows the system to be extended independently.
 
-The REST API architecture also allows additional airport-management modules to be introduced in later versions.
+\section{Risks and Mitigations}
 
-The current architecture is particularly suitable for incremental development because each major resource follows a recognizable pattern. A new resource can generally be represented using a model, controller, route group, frontend API operation, and frontend page.
-
-Scalability in the current report refers primarily to architectural extensibility rather than demonstrated large-scale production capacity. No claim is made that the prototype has been load-tested for a production airport environment.
-
-\subsection*{Risks and Mitigations}
-
-\begin{itemize}[nosep]
-    \item \textbf{Unauthorized access:} Protected API routes use JWT authentication and role-based middleware.
-    \item \textbf{Invalid user input:} Mongoose schemas define required fields, data types, enumerations, and constraints for stored records.
-    \item \textbf{Duplicate records:} Unique constraints are used for fields such as flight numbers, luggage tags, employee IDs, vehicle numbers, and visitor pass IDs.
-    \item \textbf{Frontend-backend mismatch:} API communication is centralized through the Axios API layer to maintain consistent request handling.
-    \item \textbf{Database unavailability:} The backend reports database connection errors rather than starting as if the database were available.
+\begin{itemize}
+    \item \textbf{Unauthorized API access:} Protected routes use JWT authentication and role-based authorization middleware.
+    \item \textbf{Invalid database data:} Mongoose schemas define validation rules and data types.
+    \item \textbf{Frontend-backend inconsistency:} Axios provides a centralized API communication layer.
+    \item \textbf{Incomplete role-specific interfaces:} The current prototype focuses on the administrator workflow, while additional interfaces can be implemented in future iterations.
 \end{itemize}
 
-Risk identification is important because the system contains several dependent layers. A failure in the database layer can affect the backend, which in turn affects the frontend. Similarly, an incorrect authentication token can prevent otherwise valid frontend requests from reaching their intended controllers.
+\section{Summary}
 
-The use of schemas, middleware, and centralized API communication reduces some of these risks by placing validation and access control in predictable locations.
-
-\subsection*{Project Development Perspective}
-
-From a software engineering perspective, SAMS was developed as an integration-oriented project. The final application is the result of connecting several smaller components rather than building one monolithic feature.
-
-The major development activities can be viewed as a sequence:
-
-\[
-\text{Requirement Analysis}
-\rightarrow
-\text{System Design}
-\rightarrow
-\text{Backend Development}
-\rightarrow
-\text{Frontend Development}
-\rightarrow
-\text{Integration}
-\rightarrow
-\text{Testing}
-\]
-
-Each stage depends on the previous stage. For example, the frontend cannot reliably communicate with a backend endpoint unless the endpoint structure and expected data format are understood. Similarly, role-based frontend navigation is meaningful only when corresponding backend authorization exists.
-
-\subsection*{Summary}
-
-SAMS provides a centralized airport-management platform that combines authentication, role-based authorization, operational CRUD modules, database persistence, and a web-based dashboard. The current prototype establishes the core software architecture required for further airport-management functionality.
-
-The project selection is therefore justified by the need to demonstrate a realistic multi-module information-management application. It combines database design, backend development, frontend development, authentication, authorization, API integration, and software testing within one coherent system.
-
+SAMS provides a centralized software solution for managing airport-related operational information. The project combines a React frontend, Express.js backend, MongoDB database, JWT authentication, and role-based authorization into a modular web application.
 
 \section{Project Overview}
 
-SAMS is organized around several core airport entities: flights, luggage, visitors, staff, transportation, and users.
+The system follows a centralized workflow in which users interact with the React frontend, requests are sent through the Axios communication layer, and the Express.js backend processes authenticated API requests.
 
-The system is designed around the idea that these entities are operationally related. Flights form one of the central entities because luggage and transportation records can contain references to flights. Staff and visitor records represent other operational categories, while User records support application-level authentication and authorization.
+The backend communicates with MongoDB through Mongoose models.
 
-\subsection*{Who Uses It}
+\subsection*{Primary User}
 
-The system supports multiple user roles:
+The Administrator is the primary authenticated user demonstrated in the current prototype.
 
-\begin{itemize}[nosep]
-    \item \textbf{Administrator:} Has the highest level of access and can manage major airport records.
-    \item \textbf{Staff:} Can perform operational management activities allowed by the system.
-    \item \textbf{Airline Staff:} Can access flight-related operations according to authorization rules.
-    \item \textbf{Passenger:} Has access to passenger-relevant information and protected resources.
-    \item \textbf{Visitor:} Has restricted access to visitor-relevant resources.
-    \item \textbf{Transportation Operator:} Can manage transportation-related information according to role permissions.
+\subsection*{Additional Roles}
+
+The backend defines roles for Staff, Airline Staff, Passenger, Visitor, and Transportation Operator, and role-based authorization is implemented at the API level.
+
+However, the current prototype demonstration is administrator-centric and does not provide separate dedicated frontend workflows for each of these roles. Dedicated role-specific interfaces can be developed as future extensions.
+
+\subsection*{Managed Categories}
+
+The system manages the following major categories:
+
+\begin{itemize}
+    \item Users and authentication
+    \item Flights
+    \item Luggage
+    \item Visitors
+    \item Staff
+    \item Transportation
 \end{itemize}
-
-The role names correspond to the roles defined in the User model. The role is included in the authenticated user information and is subsequently used by the authorization middleware.
-
-This distinction between user identity and resource data is important. A flight record, for example, describes an operational object, whereas a User record describes an account that is allowed to access the application. The two concepts are therefore represented separately in the database design.
-
-\subsection*{How It Actually Works, End to End}
-
-A typical session begins when a user registers or logs into the system. During login, the backend validates the credentials and generates a JWT token. The frontend stores the authenticated session information and attaches the token to subsequent API requests.
-
-When a user accesses a protected module, the backend authentication middleware verifies the JWT. The role middleware then determines whether the authenticated user has permission to perform the requested operation.
-
-The frontend communicates with the backend through REST APIs. The backend controllers process requests and interact with MongoDB through Mongoose models.
-
-For example, the flight module provides APIs for creating, viewing, updating, and deleting flight records. Similar CRUD operations are available for luggage, visitors, staff, and transportation, subject to role restrictions.
-
-The dashboard combines information obtained from the backend modules and presents the information through a centralized user interface.
-
-The complete request path can therefore be summarized as:
-
-\[
-\text{User}
-\rightarrow
-\text{React UI}
-\rightarrow
-\text{Axios}
-\rightarrow
-\text{Express Route}
-\rightarrow
-\text{Middleware}
-\rightarrow
-\text{Controller}
-\rightarrow
-\text{Mongoose}
-\rightarrow
-\text{MongoDB}
-\]
-
-The response follows the reverse direction until it reaches the frontend, where it is presented to the user.
 
 \subsection*{System Components}
 
-The system can be divided into the following components:
+The main components of SAMS are:
 
-\begin{enumerate}[nosep]
-    \item React frontend
+\begin{itemize}
+    \item Authentication context
+    \item Protected frontend routes
     \item Axios API communication layer
-    \item Authentication context and route guards
     \item Express REST API
-    \item Authentication and role middleware
+    \item Authentication and authorization middleware
     \item Controllers
     \item Mongoose models
     \item MongoDB database
-\end{enumerate}
-
-These components are not isolated. They form a layered system in which each component has a specific responsibility.
-
-The frontend is responsible for presentation and user interaction. The API client handles communication. The Express server provides the API boundary. Middleware performs common request checks. Controllers contain resource-level processing, while Mongoose models represent the database structure.
-
-This division helps prevent application logic from becoming concentrated in one file or layer.
-
-
-% ============================================================
-% CHAPTER 2
-% ============================================================
-
-\chapter{Analysis Phase}
-
-\section{Use Cases}
-
-\subsection{Use-Case Diagram}
-
-Figure~\ref{fig:usecase} represents the major actors and operations supported by SAMS. The actors represented in the system are \textbf{Administrator, Staff, Airline Staff, Passenger, Visitor, and Transportation Operator}. Each actor interacts with the system according to the access rules implemented in the backend.
-
-The use-case representation focuses on the interaction between users and the system rather than the internal implementation details. The internal Express routes, controllers, middleware, and MongoDB operations are therefore treated as implementation mechanisms that support the visible system functionality.
-
-The six actors represent the six roles available in the User model. This keeps the use-case model consistent with the implemented authentication and authorization design.
-
-% ============================================================
-% IMAGE 6 = USE CASE DIAGRAM
-% ============================================================
-
-\begin{figure}[H]
-    \centering
-    \IfFileExists{image6.png}
-    {\includegraphics[width=0.95\textwidth]{image6.png}}
-    {\fbox{\parbox{0.9\textwidth}{\centering\vspace{5cm}
-    \textit{[Insert SAMS use-case diagram here]}
-    \vspace{5cm}}}}
-    \caption{SAMS use-case diagram}
-    \label{fig:usecase}
-\end{figure}
-
-\subsection*{Use-Case Interpretation}
-
-The main interaction categories represented by the use-case model are authentication, viewing operational information, and managing operational records.
-
-Authentication is common to the application because protected resources require an authenticated user. After authentication, access depends on the user's role.
-
-For the management modules, the backend determines which operations are available to each role. This means that the use-case diagram represents the logical access relationship while the route and middleware implementation enforces that relationship.
-
-The use-case model also helps establish traceability between requirements and implementation. For example, the requirement for flight management can be traced to the Flight route, Flight controller, Flight model, and corresponding React management interface.
-
-\subsection*{Role-Based Interaction Analysis}
-
-The role model is one of the most important parts of SAMS because the application supports several categories of users.
-
-The administrator has the broadest management responsibility. Staff users can perform operational tasks permitted by the backend. Airline staff are associated primarily with flight-related access, while passengers and visitors receive more restricted access. Transportation operators have access to transportation-related functionality.
-
-The exact permissions are implemented at the backend route level. This is important because frontend visibility alone is not considered sufficient security. Even if a button or page were hidden from a user, the backend must still reject an unauthorized request.
-
-\section{Activity Diagram and Swimlane Diagram}
-
-Figure~\ref{fig:activity} illustrates the general workflow of SAMS from authentication through access to an airport-management module.
-
-The activity begins with user authentication. After successful login, the system identifies the user's role and permits access to the modules allowed for that role. The user can then perform operations such as viewing or modifying flight, luggage, visitor, staff, or transportation records. Requests are sent through the frontend API layer to the backend, where authentication, authorization, validation, and database operations are performed.
-
-The swimlane representation separates responsibilities between the user, frontend, backend, and database. This is useful because the same user action may require multiple technical steps.
-
-For example, when a user submits a new flight form, the visible action takes place in the React interface. The actual persistence, however, takes place through an HTTP request to the Express API and a database operation through Mongoose.
-
-\begin{figure}[H]
-    \centering
-    \IfFileExists{image4.png}
-    {\includegraphics[width=\textwidth]{image4.png}}
-    {\fbox{\parbox{0.9\textwidth}{\centering\vspace{5cm}
-    \textit{[Insert SAMS activity/swimlane diagram here]}
-    \vspace{5cm}}}}
-    \caption{Activity / swimlane diagram of SAMS}
-    \label{fig:activity}
-\end{figure}
-
-\subsection*{Activity Flow Explanation}
-
-The main flow can be described as follows:
-
-\begin{enumerate}[nosep]
-    \item The user opens the application.
-    \item The user enters login credentials.
-    \item The frontend sends the credentials to the authentication API.
-    \item The backend locates the user and verifies the password.
-    \item A JWT is generated for valid credentials.
-    \item The frontend stores the authenticated session information.
-    \item The user accesses a protected application module.
-    \item Axios sends the request with the JWT in the Authorization header.
-    \item Authentication middleware verifies the token.
-    \item Role middleware checks whether the user's role is permitted.
-    \item The relevant controller processes the operation.
-    \item Mongoose communicates with MongoDB when persistent data is required.
-    \item The backend returns a response.
-    \item The frontend updates the displayed information.
-\end{enumerate}
-
-The activity diagram therefore represents more than navigation. It captures the interaction between user actions and the underlying software layers.
-
-\section{Data Flow Diagrams (DFDs)}
-
-\subsection{DFD Level 0 (Context Diagram)}
-
-At Level 0, SAMS is represented as a single system interacting with its external users. Users provide authentication credentials and operational requests to the system. SAMS returns authentication results, operational records, status information, and dashboard information.
-
-The Level 0 diagram deliberately treats SAMS as one overall process. Internal components such as MongoDB, Express controllers, and React components are not expanded at this level because the purpose of a context diagram is to establish the system boundary.
-
-The external actors provide different kinds of requests depending on their role. The system processes these requests according to the authenticated user's permissions.
-
-\begin{figure}[H]
-    \centering
-    \IfFileExists{image3.png}
-    {\includegraphics[width=\textwidth]{image3.png}}
-    {\fbox{\parbox{0.9\textwidth}{\centering\vspace{5cm}
-    \textit{[Insert SAMS DFD Level 0 here]}
-    \vspace{5cm}}}}
-    \caption{DFD Level 0 -- SAMS context diagram}
-    \label{fig:dfd0}
-\end{figure}
-
-\subsection*{Level 0 Data Flow Interpretation}
-
-The main external data flows include:
-
-\begin{itemize}[nosep]
-    \item User credentials sent for registration or authentication.
-    \item Authenticated operational requests.
-    \item Flight information.
-    \item Luggage information.
-    \item Visitor information.
-    \item Staff information.
-    \item Transportation information.
-    \item Authentication and authorization responses.
-    \item Operational records returned to users.
 \end{itemize}
 
-The context-level representation is intentionally simple. It does not attempt to show individual database collections or backend controllers because doing so would make the diagram represent implementation detail rather than system context.
+% =========================================================
+% CHAPTER 2
+% =========================================================
+\chapter{Analysis Phase}
 
-\subsection{DFD Level 1}
+\section{Use-Case Analysis}
 
-The Level 1 DFD decomposes the system into its major processes:
+Figure~\ref{fig:usecase} represents the major actors and operations defined for SAMS.
 
-\begin{enumerate}[nosep]
-    \item User Authentication
-    \item Flight Management
-    \item Luggage Management
-    \item Visitor Management
-    \item Staff Management
-    \item Transportation Management
-    \item Dashboard and Reporting
-\end{enumerate}
+The Administrator is the primary user demonstrated in the current prototype. The backend also defines additional roles including Staff, Airline Staff, Passenger, Visitor, and Transportation Operator, with role-based API permissions implemented for extensibility.
 
-The MongoDB database acts as the primary persistent data store for users and operational entities.
+The current frontend demonstration focuses primarily on the centralized administrator workflow, while separate role-specific interfaces can be developed in future iterations.
 
 \begin{figure}[H]
-    \centering
-    \IfFileExists{image2.png}
-    {\includegraphics[width=\textwidth]{image2.png}}
-    {\fbox{\parbox{0.9\textwidth}{\centering\vspace{5cm}
-    \textit{[Insert SAMS DFD Level 1 here]}
-    \vspace{5cm}}}}
-    \caption{DFD Level 1 -- SAMS}
-    \label{fig:dfd1}
+\centering
+\includegraphics[width=0.92\textwidth]{image6.png}
+\caption{Use-Case Diagram}
+\label{fig:usecase}
 \end{figure}
 
-\subsection*{Level 1 Process Explanation}
+\section{Activity Diagram}
 
-\textbf{User Authentication} handles registration, login, and retrieval of authenticated user information. It interacts with the User collection.
+The activity diagram represents the major flow of interaction between the user, React frontend, Express.js backend, authentication and authorization middleware, and MongoDB database.
 
-\textbf{Flight Management} handles flight records and communicates with the Flight collection. Flight records include timing, route, gate, airline, and operational status information.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{image4.png}
+\caption{Activity Diagram}
+\label{fig:activity}
+\end{figure}
 
-\textbf{Luggage Management} handles luggage records and their relationship to flights. It maintains identifiers, passenger information, weight, status, and location.
+The authentication process begins when the user enters valid login credentials.
 
-\textbf{Visitor Management} maintains visitor registration information, pass identifiers, validity periods, and visitor status.
+The React frontend sends the credentials to the backend through Axios. The backend searches for the user, verifies the password using bcrypt, and generates a JWT token after successful authentication.
 
-\textbf{Staff Management} maintains employee information such as employee ID, department, role, shift, and status.
+The frontend stores the token and attaches it to subsequent protected API requests.
 
-\textbf{Transportation Management} maintains vehicle, driver, route, scheduled time, and status information. Transportation records can reference Flight documents.
+For protected operations, the backend first verifies the JWT using authentication middleware. The role middleware then checks whether the authenticated user's role is authorized for the requested operation.
 
-\textbf{Dashboard and Reporting} obtains information from the implemented operational modules and presents aggregated information to the frontend user.
+The role middleware does not query MongoDB. It uses the authenticated user information available after JWT verification.
 
-\subsection*{DFD Design Rationale}
+Authorized requests are then forwarded to the appropriate controller, which interacts with MongoDB through the corresponding Mongoose model.
 
-The two levels of DFD provide complementary views of the same system. Level 0 establishes the boundary between SAMS and its users, while Level 1 explains how the system internally separates major processing areas.
+\section{Data Flow Diagram -- Level 0}
 
-This separation also reflects the actual backend organization. The project contains separate route and controller files for the major operational entities instead of placing all requests in one API module.
+The Level 0 DFD represents SAMS as a centralized system interacting with the external users and exchanging operational information.
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{image3.png}
+\caption{Data Flow Diagram Level 0}
+\label{fig:dfd0}
+\end{figure}
 
-\section{Software Requirement Specification (IEEE 830 Format)}
+The major external actors are Administrator, Staff, Airline Staff, Passenger, Visitor, and Transportation Operator.
+
+MongoDB is treated as an internal data store rather than an external entity at the context level.
+
+\section{Data Flow Diagram -- Level 1}
+
+The Level 1 DFD decomposes the SAMS system into its major functional processes.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{image2.png}
+\caption{Data Flow Diagram Level 1}
+\label{fig:dfd1}
+\end{figure}
+
+The main processes include authentication, flight management, luggage management, visitor management, staff management, transportation management, and dashboard/reporting functions.
+
+The corresponding data is stored in MongoDB collections through the backend API.
+
+\section{Software Requirements Specification}
 
 \subsection{Introduction}
 
-\textbf{Purpose.} This section specifies the functional and non-functional requirements of the Smart Airport Management System.
-
-\textbf{Document Conventions.} ``Shall'' denotes a mandatory requirement. Requirements are identified using FR for functional requirements and NFR for non-functional requirements.
-
-\textbf{Intended Audience.} The report is intended for project evaluators, developers, testers, and future maintainers of the system.
-
-\textbf{Product Scope.} The current prototype covers authentication, role-based authorization, flight management, luggage management, visitor management, staff management, transportation management, dashboard functionality, reports, and application settings.
+The Software Requirements Specification defines the functional and non-functional requirements of the Smart Airport Management System.
 
 \subsection{Overall Description}
 
-\textbf{Product Perspective.} SAMS is a web application composed of a React frontend, an Express.js REST API backend, and a MongoDB database.
+SAMS is a web-based airport management prototype designed to centralize operational information.
 
-\textbf{User Classes and Characteristics.} The system supports administrator, staff, airline staff, passenger, visitor, and transportation operator roles. Each role receives access according to the authorization rules defined by the backend.
+The frontend provides the user interface, while the backend provides REST APIs and communicates with MongoDB.
 
-\textbf{Operating Environment.} The frontend operates in a modern web browser. The backend runs on Node.js and communicates with MongoDB.
+\subsection{User Interfaces}
 
-\textbf{Design and Implementation Constraints.} The system depends on network communication between frontend and backend and on the availability of the configured MongoDB database.
+The frontend provides interfaces for:
 
-\textbf{Assumptions and Dependencies.} Users are expected to have valid credentials and sufficient permissions for protected operations. The backend requires a configured database connection and JWT secret.
+\begin{itemize}
+    \item Login
+    \item Dashboard
+    \item Flights
+    \item Luggage
+    \item Visitors
+    \item Staff
+    \item Transportation
+    \item Reports
+    \item Settings
+\end{itemize}
 
-\subsection*{Functional Scope by Module}
-
-The functional scope can be viewed as a set of related management responsibilities rather than independent pages.
-
-Authentication establishes the user identity required for protected operations. Flight management provides the central operational flight records. Luggage management connects passenger luggage information with flights. Visitor and staff management maintain personnel-related operational records. Transportation management records vehicles and their associated operational information.
-
-Dashboard and reports then provide a presentation layer over the information available from these modules.
-
-\subsection*{Data Requirements}
-
-The application requires structured information for both authentication and airport operations.
-
-For authentication, the primary information consists of name, email, password, role, and timestamps. For operational resources, each model has its own required fields and selected enumerated values.
-
-The database design uses unique identifiers where duplicate values would be problematic. Examples include flight numbers, luggage tags, employee IDs, vehicle numbers, and visitor pass IDs.
-
-The use of enumerated status fields also reduces inconsistency. Instead of allowing arbitrary status strings, models restrict status values to predefined alternatives.
-
-\subsection{External Interface Requirements}
-
-\textbf{User Interfaces.} The application provides authentication pages, dashboard, flight management, luggage management, visitor management, staff management, transportation management, reports, and settings interfaces.
-
-\textbf{Software Interfaces.} The React frontend communicates with the Express REST API using Axios. The backend communicates with MongoDB through Mongoose.
-
-\textbf{Communication Interfaces.} Frontend-backend communication uses HTTP requests with JSON request and response data.
-
-The API boundary allows the frontend to remain independent of database implementation details. A frontend component does not need to know how MongoDB stores the record; it only needs to communicate with the appropriate API endpoint and interpret the returned response.
-
-\subsection{System Features (Functional Requirements)}
+\subsection{Functional Requirements}
 
 \begin{table}[H]
-\centering\small
-\caption{Functional requirements}
-\label{tab:fr}
-\begin{tabularx}{\textwidth}{L{2cm} X}
+\centering
+\caption{Functional Requirements}
+\begin{tabular}{p{2.5cm}p{10.5cm}}
 \toprule
-\textbf{ID} & \textbf{Requirement} \\
+\textbf{ID} & \textbf{Requirement}\\
 \midrule
-FR-1.1 & The system shall allow users to register an account. \\
-FR-1.2 & The system shall allow registered users to log in using credentials. \\
-FR-1.3 & The system shall generate a JWT token after successful authentication. \\
-FR-1.4 & The system shall protect authenticated API resources using middleware. \\
-FR-1.5 & The system shall restrict operations according to user roles. \\
-FR-2.1 & The system shall allow authorized users to create flight records. \\
-FR-2.2 & The system shall allow authorized users to view flight records. \\
-FR-2.3 & The system shall allow authorized users to update flight records. \\
-FR-2.4 & The system shall allow authorized users to delete flight records where permitted. \\
-FR-3.1 & The system shall maintain luggage records. \\
-FR-3.2 & The system shall associate luggage with flights. \\
-FR-3.3 & The system shall maintain luggage status and location information. \\
-FR-4.1 & The system shall maintain visitor registration records. \\
-FR-4.2 & The system shall maintain visitor pass validity and status. \\
-FR-5.1 & The system shall maintain staff records. \\
-FR-5.2 & The system shall maintain staff department, role, shift, and status information. \\
-FR-6.1 & The system shall maintain airport transportation records. \\
-FR-6.2 & The system shall associate transportation records with flights where applicable. \\
-FR-7.1 & The system shall provide a centralized dashboard. \\
-FR-7.2 & The system shall provide reports and operational summaries. \\
+FR-01 & The system shall authenticate users using registered credentials.\\
+FR-02 & The system shall generate a JWT after successful authentication.\\
+FR-03 & The system shall protect API routes using JWT verification.\\
+FR-04 & The system shall apply role-based authorization to protected API operations.\\
+FR-05 & The system shall allow authorized users to manage flight information.\\
+FR-06 & The system shall allow authorized users to manage luggage information.\\
+FR-07 & The system shall allow authorized users to manage visitor information.\\
+FR-08 & The system shall allow authorized users to manage staff information.\\
+FR-09 & The system shall allow authorized users to manage transportation information.\\
+FR-10 & The system shall provide a centralized dashboard view.\\
 \bottomrule
-\end{tabularx}
+\end{tabular}
 \end{table}
 
 \subsection{Non-Functional Requirements}
 
 \begin{table}[H]
-\centering\small
-\caption{Non-functional requirements}
-\label{tab:nfr}
-\begin{tabularx}{\textwidth}{L{3cm} X}
+\centering
+\caption{Non-Functional Requirements}
+\begin{tabular}{p{3cm}p{10cm}}
 \toprule
-\textbf{Category} & \textbf{Requirement} \\
+\textbf{Category} & \textbf{Requirement}\\
 \midrule
-NFR-1 Security & Protected API resources shall require valid authentication. \\
-NFR-2 Authorization & Operations shall be restricted according to the authenticated user's role. \\
-NFR-3 Performance & The frontend shall communicate with backend APIs without unnecessary repeated requests. \\
-NFR-4 Reliability & The system shall return appropriate error responses when authentication, validation, or database operations fail. \\
-NFR-5 Maintainability & Frontend, backend routes, controllers, middleware, and models shall remain modular. \\
-NFR-6 Usability & Management modules shall provide consistent interfaces for common CRUD operations. \\
-NFR-7 Data Integrity & Database schemas shall enforce required fields, enumerations, and unique identifiers where applicable. \\
-NFR-8 Scalability & New airport-management modules shall be addable without replacing the complete architecture. \\
+Security & Authentication and authorization shall be implemented for protected API access.\\
+Performance & API requests should be processed within reasonable response times under normal prototype usage.\\
+Usability & The frontend should provide clear navigation and understandable management interfaces.\\
+Maintainability & Frontend and backend modules should remain separated and modular.\\
+Scalability & Additional modules and role-specific interfaces should be extendable in future versions.\\
+Reliability & Database operations should return appropriate success or error responses.\\
 \bottomrule
-\end{tabularx}
+\end{tabular}
 \end{table}
 
 \subsection{Other Requirements}
 
-The application requires a configured MongoDB connection, a JWT secret, and the appropriate runtime environment variables. Sensitive configuration values should not be committed to the source repository.
+The application requires Node.js, MongoDB, and the required frontend and backend dependencies.
 
-Automated unit and integration test suites are not part of the current implementation and are identified as future improvements.
-
-\subsection*{Requirement Traceability}
-
-The requirements are reflected across multiple software layers. Authentication requirements are implemented through the authentication routes, controller, User model, JWT generation, and frontend authentication context. Operational requirements are implemented through individual route groups, controllers, models, and frontend resource pages.
-
-This traceability is useful during testing because a requirement can be checked at both the API and user-interface levels. For example, a flight creation requirement can be tested by directly calling the API and by submitting the corresponding frontend form.
-
-
-% ============================================================
+% =========================================================
 % CHAPTER 3
-% ============================================================
-
+% =========================================================
 \chapter{Design Phase}
 
 \section{System Architecture}
 
-The SAMS architecture follows a three-layer web application model.
+SAMS follows a three-layer architecture consisting of:
 
-\begin{enumerate}[nosep]
-    \item \textbf{Presentation Layer:} React frontend responsible for user interaction, routing, forms, dashboard views, and API communication.
-    \item \textbf{Application Layer:} Node.js and Express.js backend responsible for routing, authentication, authorization, controllers, validation, and business operations.
-    \item \textbf{Data Layer:} MongoDB accessed through Mongoose models for persistent storage.
+\begin{enumerate}
+    \item Presentation layer
+    \item Application/API layer
+    \item Data layer
 \end{enumerate}
 
-The frontend does not communicate directly with MongoDB. Requests pass through the backend REST API, allowing authentication and authorization rules to be enforced centrally.
+The React frontend forms the presentation layer. The Express.js backend forms the application layer, and MongoDB forms the data layer.
 
-The layered architecture also improves separation of concerns. The presentation layer does not need to implement database logic, while the database layer does not need to know how information is displayed.
+\section{Backend Architecture}
 
-\subsection*{Request Processing Model}
+The backend is organized into configuration, routes, controllers, middleware, and models.
 
-A protected request follows the following conceptual sequence:
-
-\[
-\text{Frontend Request}
-\rightarrow
-\text{Express Route}
-\rightarrow
-\text{JWT Authentication}
-\rightarrow
-\text{Role Authorization}
-\rightarrow
-\text{Controller}
-\rightarrow
-\text{Mongoose Model}
-\rightarrow
-\text{MongoDB}
-\]
-
-The response then travels back through the controller and Express server to the frontend.
-
-This model is repeated across the major CRUD modules. The main difference between modules is the resource being processed and the roles allowed to perform each operation.
-
-\subsection*{Backend Architecture}
-
-The backend is organized into:
-
-\begin{itemize}[nosep]
-    \item \texttt{config/} -- database configuration.
-    \item \texttt{controllers/} -- request processing and CRUD operations.
-    \item \texttt{middleware/} -- authentication and role authorization.
-    \item \texttt{models/} -- Mongoose database schemas.
-    \item \texttt{routes/} -- REST API endpoints.
-    \item \texttt{server.js} -- Express server initialization and route registration.
+\begin{itemize}
+    \item \textbf{Configuration:} MongoDB connection configuration.
+    \item \textbf{Routes:} Define API endpoints.
+    \item \textbf{Controllers:} Process application operations.
+    \item \textbf{Middleware:} Authentication and role-based authorization.
+    \item \textbf{Models:} Define MongoDB data structures through Mongoose.
 \end{itemize}
 
-The backend structure follows the principle of keeping route definitions separate from the implementation of business operations.
+\section{Frontend Architecture}
 
-Routes define the HTTP interface. Middleware handles common checks. Controllers contain resource-specific processing, and models define the structure of persisted records.
+The frontend is implemented using React and follows a component-based structure.
 
-\subsection*{Frontend Architecture}
+The main frontend responsibilities include:
 
-The frontend contains:
-
-\begin{itemize}[nosep]
-    \item React application components.
-    \item Authentication context.
-    \item Protected application routes.
-    \item Centralized Axios API client.
-    \item Reusable resource-management pages.
-    \item Dashboard and report views.
-    \item Module-specific interfaces for luggage and other operational resources.
+\begin{itemize}
+    \item User authentication interface.
+    \item Protected navigation.
+    \item API communication using Axios.
+    \item CRUD interfaces for operational modules.
+    \item Dashboard presentation.
+    \item Reports and settings views.
 \end{itemize}
-
-The frontend therefore has both shared and module-specific components. Shared infrastructure is used for authentication, routing, and API communication, while individual pages provide resource-specific interfaces.
-
-\subsection*{Architectural Advantages}
-
-The selected architecture provides several practical benefits.
-
-First, the frontend and backend can be developed independently as long as the API contract remains stable. Second, security-related checks are centralized in the backend rather than being repeated inside each frontend page. Third, the database structure is encapsulated behind Mongoose models.
-
-The architecture also makes debugging more systematic. A problem can be investigated at the UI, API request, middleware, controller, model, or database level instead of treating the complete application as one indivisible component.
-
-
-% ============================================================
-% CLASS DIAGRAM
-% IMAGE 1 = CLASS DIAGRAM
-% ============================================================
 
 \section{Class Diagram}
 
-Figure~\ref{fig:class} represents the principal data entities used by SAMS. The class diagram is limited to the actual database-backed entities implemented through Mongoose models: \textbf{User, Flight, Luggage, Staff, Visitor, and Transportation}. Dashboard, Reports, and Settings are frontend application features and are therefore not represented as database classes.
-
-The distinction is important because a class diagram for the data model should represent persistent entities rather than every visual page in the application.
+The class diagram represents the major database entities used by the application.
 
 \begin{figure}[H]
-    \centering
-    \IfFileExists{image1.png}
-    {\includegraphics[width=0.95\textwidth]{image1.png}}
-    {\fbox{\parbox{0.9\textwidth}{\centering\vspace{5cm}
-    \textit{[Insert SAMS class diagram here]}
-    \vspace{5cm}}}}
-    \caption{SAMS class diagram}
-    \label{fig:class}
+\centering
+\includegraphics[width=0.95\textwidth]{image1.png}
+\caption{Class Diagram}
+\label{fig:class}
 \end{figure}
 
-\subsection*{Entity Relationships}
+The primary entities are User, Flight, Luggage, Staff, Transportation, and Visitor.
 
-\begin{itemize}[nosep]
-    \item A \textbf{Flight} contains flight number, airline, origin, destination, departure and arrival times, gate, and status.
-    \item A \textbf{Luggage} record contains a luggage tag, passenger information, flight reference, weight, status, and location.
-    \item A \textbf{Staff} record contains employee ID, name, department, role, contact number, shift, and status.
-    \item A \textbf{Visitor} record contains visitor information, purpose, person to visit, pass ID, validity period, and status.
-    \item A \textbf{Transportation} record contains vehicle number, vehicle type, driver, route, flight reference, scheduled time, and status.
-    \item A \textbf{User} record contains name, email, password, role, and timestamps.
-\end{itemize}
+\section{Entity Relationships}
 
-\subsection*{Relationships Through References}
+The database design uses references between related entities.
 
-Luggage and transportation contain references to Flight documents. These relationships allow an operational record to identify the flight with which it is associated.
+For example, luggage records can reference a flight, while transportation records can also reference a flight.
 
-The use of references avoids copying the complete flight record into every luggage or transportation document. Instead, the related Flight document can be identified through its database reference.
-
-This design is particularly useful when flight information changes. The relationship remains based on the flight document rather than creating independent duplicated flight information in related records.
-
-\subsection*{Data Validation Through Models}
-
-The Mongoose models provide more than simple field definitions. They also specify required properties, unique constraints, minimum values, and enumerated status values.
-
-For example, flight status is restricted to defined operational states, while luggage weight has a minimum value constraint. These restrictions help ensure that invalid data is not intentionally stored through the normal application interface.
-
-
-% ============================================================
-% SEQUENCE DIAGRAM
-% IMAGE 5 = SEQUENCE DIAGRAM
-% ============================================================
+The relationships are implemented using MongoDB ObjectId references through Mongoose.
 
 \section{Sequence Diagram}
 
-The sequence diagram represents a typical authenticated request.
-
-The user interacts with the React frontend. The frontend sends an API request using Axios. The Express server receives the request, authentication middleware verifies the JWT, and role middleware verifies the user's permissions. The appropriate controller then interacts with the MongoDB database through the corresponding Mongoose model. The resulting response is returned through the backend to the frontend.
+The sequence diagram represents the interaction between the user, frontend, backend, authentication middleware, controller, and database.
 
 \begin{figure}[H]
-    \centering
-    \IfFileExists{image5.png}
-    {\includegraphics[width=0.95\textwidth]{image5.png}}
-    {\fbox{\parbox{0.9\textwidth}{\centering\vspace{5cm}
-    \textit{[Insert SAMS sequence diagram here]}
-    \vspace{5cm}}}}
-    \caption{SAMS sequence diagram for an authenticated API request}
-    \label{fig:sequence}
+\centering
+\includegraphics[width=0.92\textwidth]{image5.png}
+\caption{Sequence Diagram}
+\label{fig:sequence}
 \end{figure}
-
-\subsection*{Sequence Interpretation}
-
-The sequence diagram demonstrates that the frontend does not directly perform the database operation.
-
-For a protected operation, the first security check occurs before the controller performs its resource-specific work. The authentication middleware verifies that the request contains a valid JWT. The role middleware then determines whether the authenticated user is allowed to perform the operation.
-
-If both checks succeed, the controller performs the requested operation. If the operation involves persistent information, the controller uses the appropriate Mongoose model.
-
-The resulting database information is returned to the controller, which produces the API response. Axios receives the response and the React component updates its state or displayed information.
-
-\subsection*{Error Paths}
-
-The sequence also implies several possible failure points.
-
-An invalid login results in authentication failure and no authenticated session. A protected request without a token is rejected by authentication middleware. An authenticated user without the required role is rejected by authorization middleware. A request containing invalid model data may be rejected during database validation.
-
-These different failure conditions are useful during testing because they verify that the application does not treat all errors as successful requests.
-
-
-% ============================================================
-% DATABASE DESIGN
-% ============================================================
 
 \section{Database Design}
 
-MongoDB is used as the persistent database, with Mongoose providing schema definitions and database interaction.
+The major MongoDB collections correspond to the following Mongoose models:
 
-The primary collections correspond to the following models:
-
-\begin{itemize}[nosep]
-    \item Users
-    \item Flights
+\begin{itemize}
+    \item User
+    \item Flight
     \item Luggage
     \item Staff
     \item Transportation
-    \item Visitors
+    \item Visitor
 \end{itemize}
 
-The schemas enforce required properties and selected unique constraints.
-
-The database design follows the operational structure of the application. Each major resource has a corresponding model rather than placing unrelated information into one generalized collection.
-
-\subsection*{Flight Model}
-
-The Flight model stores flight number, airline, origin, destination, departure time, arrival time, gate, and flight status.
-
-The flight number is unique, helping prevent multiple records from using the same identifier. The status field uses a defined set of values such as Scheduled, Delayed, Boarding, Departed, Arrived, and Cancelled.
-
-The model also provides the information required by other modules that refer to flights.
-
-\subsection*{Luggage Model}
-
-The Luggage model stores luggage tag, passenger name, flight reference, weight, luggage status, and location.
-
-The luggage tag acts as a unique identifier for an individual luggage record. The flight field is a reference to the corresponding Flight document.
-
-Luggage status is represented using predefined values including checked-in, in-transit, arrived, claimed, and lost.
-
-\subsection*{Staff Model}
-
-The Staff model stores employee ID, name, department, role, contact number, shift, and active/inactive status.
-
-Employee ID is unique. Shift values are restricted to Morning, Evening, and Night, while status distinguishes active and inactive staff records.
-
-\subsection*{Transportation Model}
-
-The Transportation model stores vehicle number, vehicle type, driver name, route, associated flight, scheduled time, and transportation status.
-
-Vehicle type is restricted to Cab or Shuttle in the current implementation. Transportation records can reference Flight documents, allowing the system to associate ground transportation information with a flight.
-
-\subsection*{Visitor Model}
-
-The Visitor model stores visitor name, contact number, purpose, person being visited, pass ID, pass validity, and visitor status.
-
-The pass ID is unique and provides an identifiable value for the visitor record. Validity fields allow the system to store the intended period for which the visitor pass applies.
-
-\subsection*{User Model}
-
-The User model stores name, email, password, role, and timestamps. Passwords are processed using password hashing rather than being stored as plain text.
-
-The email field is unique and normalized to lowercase. The role field uses the defined application roles. Timestamps allow user records to contain creation and update information.
-
-\subsection*{Database Design Principles}
-
-The database design applies several simple but important principles:
-
-\begin{enumerate}[nosep]
-    \item Each major operational resource has its own model.
-    \item Required fields are enforced through Mongoose schemas.
-    \item Unique identifiers are used where duplicate records would cause ambiguity.
-    \item Enumerated fields reduce inconsistent status values.
-    \item References are used where an operational entity needs to associate with a Flight.
-    \item Database operations are performed through backend controllers rather than directly by the frontend.
-\end{enumerate}
-
-These principles provide sufficient structure for the current prototype without introducing unnecessary database complexity.
-
-
-% ============================================================
-% SECURITY DESIGN
-% ============================================================
+Each schema defines the fields, data types, constraints, and enumerated values required for the respective operational entity.
 
 \section{Security Design}
 
-Authentication and authorization are handled by the backend.
+\subsection*{Authentication}
 
-The security design follows a layered approach. The frontend provides the user interaction for login, while the backend remains responsible for deciding whether a request is authenticated and authorized.
+Authentication is performed during login.
 
-\subsection*{JWT Authentication}
+The backend verifies the user's credentials and generates a JWT after successful authentication.
 
-After successful login, the backend generates a JSON Web Token. The frontend attaches this token to protected API requests using the HTTP Authorization header.
+\subsection*{Protected API Access}
 
-The backend authentication middleware extracts and verifies the token using the configured JWT secret.
+Authentication and authorization are implemented at the backend API layer.
 
-JWT is suitable for the current REST API design because the token can accompany requests without requiring the backend to maintain a separate session object for every browser request.
+The backend first verifies the JWT token using authentication middleware. After successful authentication, role-based middleware checks whether the authenticated user's role is permitted to access the requested operation.
 
-\subsection*{Role-Based Authorization}
+In the current demonstration, the Administrator is the primary authenticated user and therefore has access to the administrative management operations permitted by the backend.
 
-After authentication, the role middleware checks whether the user's role belongs to the list of roles permitted for the requested operation.
+The JWT is generated after successful login and is reused for subsequent protected requests. The backend automatically verifies the token on each protected request, so the administrator does not need to log in again for every operation.
 
-This creates two levels of protection:
+\subsection*{Password Security}
 
-\begin{enumerate}[nosep]
-    \item Authentication -- ``Who is the user?''
-    \item Authorization -- ``Is this user allowed to perform this operation?''
-\end{enumerate}
+Passwords are handled using bcryptjs for password hashing and verification rather than storing plaintext passwords.
 
-The distinction prevents a valid user account from automatically receiving unrestricted access.
-
-\subsection*{Password Protection}
-
-User passwords are processed using \texttt{bcryptjs}. The system therefore does not need to store passwords as plain text.
-
-Password hashing is important because the database should not contain directly usable plaintext credentials. The login operation compares the submitted password against the stored password hash.
-
-\subsection*{Frontend Route Protection}
-
-The frontend also uses protected application routes. This improves user experience by preventing unauthenticated users from navigating directly into the application interface.
-
-However, frontend protection is not treated as the primary security boundary. Backend middleware remains responsible for protecting API operations.
-
-\subsection*{Environment Configuration}
-
-Sensitive configuration values such as the MongoDB connection string and JWT secret are provided through environment variables.
-
-This approach prevents configuration secrets from being hard-coded into source files. Environment configuration also allows development and deployment environments to use different connection values without modifying application logic.
-
-\subsection*{Security Limitations}
-
-The current security design is appropriate for a prototype but does not represent a complete production security framework.
-
-Further production-level improvements could include rate limiting, stronger token lifecycle management, password recovery, audit logging, secure deployment configuration, HTTPS enforcement, and systematic security testing.
-
-These are identified as future improvements rather than claimed features of the current implementation.
-
-
-% ============================================================
+% =========================================================
 % CHAPTER 4
-% ============================================================
-
+% =========================================================
 \chapter{Implementation Phase}
 
 \section{Frontend Implementation}
 
-The frontend is implemented using React and Vite.
+The frontend is implemented using React.js and Vite.
 
-The application uses React Router for navigation between authenticated modules. Protected routes prevent unauthenticated users from directly accessing application pages.
+The main interface modules include:
 
-The frontend follows a component-oriented design. Common functionality such as authentication state and API communication is separated from individual resource pages.
-
-\subsection*{Authentication Context}
-
-The authentication context manages:
-
-\begin{itemize}[nosep]
-    \item Current user information.
-    \item Authentication token.
-    \item Login operation.
-    \item Registration operation.
-    \item Logout operation.
-    \item Session restoration when the application starts.
+\begin{itemize}
+    \item Login
+    \item Dashboard
+    \item Flights
+    \item Luggage
+    \item Visitors
+    \item Staff
+    \item Transportation
+    \item Reports
+    \item Settings
 \end{itemize}
 
-The frontend stores the authentication token and user information locally and uses the token when communicating with protected backend APIs.
-
-When the application starts with an existing token, the authentication context can request the authenticated user's information from the backend. This allows the application to restore the user session rather than requiring a login on every page refresh.
-
-\subsection*{Protected Routes}
-
-Protected routes provide the navigation-level security layer of the React application.
-
-The route guard checks whether an authenticated user is available before allowing access to the protected application area. If authentication information is unavailable, the user is directed toward the authentication interface.
-
-This provides a clear separation between public authentication pages and the internal application dashboard and modules.
-
-\subsection*{API Client}
-
-Axios is configured as the central HTTP client. The API client uses the configured backend URL and automatically adds the JWT token to authenticated requests.
-
-This avoids duplicating authentication-header logic across individual frontend modules.
-
-The centralized client also provides a consistent location for common HTTP behaviour. For example, an unauthorized API response can be handled centrally instead of requiring every individual page to implement the same logic.
-
-\subsection*{Resource Management}
-
-Reusable frontend components are used for several CRUD-oriented resources. The common resource page pattern provides consistent handling for:
-
-\begin{itemize}[nosep]
-    \item Listing records.
-    \item Creating records.
-    \item Editing records.
-    \item Deleting records.
-    \item Displaying API errors.
-\end{itemize}
-
-This approach reduces repeated frontend code for resources that follow similar CRUD workflows.
-
-\subsection*{Module-Specific Interface}
-
-Although several modules share common CRUD behaviour, not all resources have identical fields or user interactions. The luggage module, for example, has its own interface requirements because luggage contains status, location, weight, passenger information, and flight association.
-
-The frontend therefore combines reusable structures with module-specific components rather than forcing every resource into exactly the same interface.
-
+Protected frontend routes prevent unauthenticated users from accessing the main management interface.
 
 \section{Backend Implementation}
 
 The backend is implemented using Node.js and Express.js.
 
-The Express server registers the API routes for the different airport-management modules and connects to MongoDB before accepting application requests.
-
-The principal API groups are:
+The server exposes REST API endpoints under the \texttt{/api} path.
 
 \begin{table}[H]
 \centering
-\caption{SAMS backend API modules}
-\label{tab:api}
-\begin{tabular}{L{4cm} L{4cm} L{5cm}}
+\caption{Backend API Modules}
+\begin{tabular}{p{4cm}p{8.5cm}}
 \toprule
-\textbf{Module} & \textbf{Base Route} & \textbf{Purpose} \\
+\textbf{Module} & \textbf{API Base Path}\\
 \midrule
-Authentication & \texttt{/api/auth} & Registration, login, current user \\
-Flights & \texttt{/api/flights} & Flight CRUD operations \\
-Luggage & \texttt{/api/luggage} & Luggage CRUD operations \\
-Visitors & \texttt{/api/visitors} & Visitor CRUD operations \\
-Staff & \texttt{/api/staff} & Staff CRUD operations \\
-Transportation & \texttt{/api/transportation} & Transportation CRUD operations \\
+Authentication & /api/auth\\
+Flights & /api/flights\\
+Luggage & /api/luggage\\
+Visitors & /api/visitors\\
+Staff & /api/staff\\
+Transportation & /api/transportation\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The route structure gives each major resource a predictable API boundary. This makes it easier for frontend developers to identify the endpoint responsible for a particular operation.
-
-\subsection*{Express Server}
-
-The main server initializes the Express application, loads environment configuration, enables required middleware, establishes the database connection, and mounts the API routes.
-
-The server therefore acts as the central integration point for the backend.
-
-The route groups are mounted under the common \texttt{/api} prefix, while individual route files define the operations for their respective resources.
-
-\subsection*{Controllers}
-
-Controllers contain the implementation of resource-level operations.
-
-The controllers receive requests from routes, process the relevant information, interact with the appropriate model, and return an HTTP response.
-
-This organization prevents the route definitions from becoming overloaded with database logic.
-
-\subsection*{Middleware}
-
-The backend uses authentication and role middleware.
-
-Authentication middleware verifies the JWT and makes the authenticated user information available to subsequent processing.
-
-Role middleware receives the permitted roles for an operation and compares them with the authenticated user's role.
-
-An important design characteristic is that role middleware does not need to query MongoDB for every authorization decision. The authenticated user information is obtained from the verified JWT and is then used by the role-checking layer.
-
-\subsection*{Models}
-
-Mongoose models represent the persistent entities.
-
-Each model defines the expected fields, data types, required properties, constraints, references, and enumerated values where applicable.
-
-This provides a consistent data structure between the backend controller logic and MongoDB.
-
-\subsection*{Error Handling}
-
-The backend returns appropriate HTTP responses for common failure conditions such as missing authentication, invalid authorization, invalid data, unavailable records, and database-related failures.
-
-Returning meaningful status codes is important because the frontend can use these responses to determine whether an operation succeeded or needs to be reported to the user.
-
-
 \section{Authentication Implementation}
 
-The authentication module provides registration and login endpoints.
+The authentication flow consists of the following steps:
 
-During registration:
-
-\begin{enumerate}[nosep]
-    \item User information is received by the backend.
-    \item Password information is processed securely.
-    \item A User document is created in MongoDB.
+\begin{enumerate}
+    \item The user enters an email and password.
+    \item The frontend sends the credentials to the login API.
+    \item The backend retrieves the corresponding user.
+    \item The password is verified using bcryptjs.
+    \item A JWT is generated after successful verification.
+    \item The frontend stores the JWT for the authenticated session.
+    \item Axios automatically attaches the token to subsequent protected API requests.
+    \item The backend verifies the token before processing protected requests.
 \end{enumerate}
 
-During login:
+\section{Flight Management}
 
-\begin{enumerate}[nosep]
-    \item The email is located in the database.
-    \item The submitted password is compared with the stored password hash.
-    \item A JWT is generated after successful validation.
-    \item The token and user information are returned to the frontend.
-\end{enumerate}
+The flight module provides API operations for managing flight information.
 
-\subsection*{Authentication Request Lifecycle}
+Flight records contain information such as flight number, airline, origin, destination, departure time, arrival time, gate, and status.
 
-The authentication lifecycle can be summarized as:
+\section{Luggage Management}
 
-\[
-\text{Credentials}
-\rightarrow
-\text{Authentication Controller}
-\rightarrow
-\text{User Lookup}
-\rightarrow
-\text{Password Verification}
-\rightarrow
-\text{JWT Generation}
-\rightarrow
-\text{Frontend Session}
-\]
+The luggage module manages luggage records associated with passengers and flights.
 
-For subsequent protected requests, the token is sent back to the server in the Authorization header.
+The backend supports operations for creating, retrieving, updating, and deleting luggage records according to the permissions assigned to the authenticated role.
 
-The backend then verifies the token before allowing access to the protected controller.
+\section{Visitor Management}
 
-\subsection*{Current User Endpoint}
+The visitor module manages visitor registration information including visitor name, contact number, purpose, person to visit, pass information, validity period, and status.
 
-The authenticated-user endpoint allows the frontend to retrieve information associated with the currently authenticated token.
+\section{Staff Management}
 
-This endpoint is useful during session restoration because the frontend can validate an existing token and obtain the corresponding user information.
+The staff module manages airport staff information including employee ID, name, department, role, contact number, shift, and status.
 
+\section{Transportation Management}
 
-\section{Flight Management Implementation}
+The transportation module manages transportation records including vehicle number, vehicle type, driver, route, scheduled time, related flight, and transportation status.
 
-The Flight module supports:
+\section{Dashboard}
 
-\begin{itemize}[nosep]
-    \item Creating flights.
-    \item Retrieving flight records.
-    \item Retrieving an individual flight.
-    \item Updating flight information.
-    \item Deleting flights where permitted.
-\end{itemize}
+The dashboard provides a consolidated view of available operational information.
 
-Flight records contain a unique flight number and operational information including airline, origin, destination, gate, timing, and status.
+The dashboard uses the application's API communication layer to obtain available operational information and presents it in a consolidated management view.
 
-The module provides one of the central datasets for the system because both luggage and transportation records can contain references to flights.
+Where complete operational data is not available, the current prototype may use predefined demonstration values for presentation purposes.
 
-The controller also handles retrieval and sorting of flight information so that the frontend can present operational records in an appropriate order.
+\section{Reports}
 
-\subsection*{Flight Status}
+The reports section provides a consolidated view of selected system and operational information.
 
-The current Flight model supports the following status values:
+The current implementation is intended as a prototype reporting interface and can be extended with more advanced database-derived analytics in future versions.
 
-\begin{itemize}[nosep]
-    \item Scheduled
-    \item Delayed
-    \item Boarding
-    \item Departed
-    \item Arrived
-    \item Cancelled
-\end{itemize}
+\section{Settings}
 
-Using a defined status set reduces inconsistent representations of flight state.
+The settings interface provides basic system and user-related information such as the authenticated role, API configuration, and interface preferences.
 
-
-\section{Luggage Management Implementation}
-
-The Luggage module maintains luggage information associated with flights.
-
-Each luggage record contains a unique luggage tag and can store passenger name, flight reference, weight, status, and location.
-
-The supported luggage statuses include:
-
-\begin{itemize}[nosep]
-    \item Checked-in
-    \item In-transit
-    \item Arrived
-    \item Claimed
-    \item Lost
-\end{itemize}
-
-The luggage module demonstrates how a dependent operational record can reference another database entity. Instead of storing a complete copy of the flight information, the luggage record contains a Flight reference.
-
-This provides a meaningful relationship between the two resources while keeping their individual models separate.
-
-\subsection*{Luggage Tracking Information}
-
-The combination of luggage tag, status, and location provides a basic tracking representation.
-
-The current implementation should be understood as a database-based management module rather than a physical real-time tracking system. It records the information supplied through the application but does not claim to receive sensor or airport-baggage-system data.
-
-
-\section{Visitor Management Implementation}
-
-The Visitor module maintains airport visitor records.
-
-Each record can contain visitor name, contact information, purpose, person to visit, pass ID, pass validity period, and visitor status.
-
-The supported visitor states include Registered, Active, Expired, and Cancelled.
-
-The visitor module provides structured management of visitor information and ensures that records can be identified through a unique pass ID.
-
-The validity fields also allow the application to represent the intended active period of a visitor pass.
-
-
-\section{Staff Management Implementation}
-
-The Staff module stores employee information including employee ID, name, department, role, contact number, shift, and employment status.
-
-The system supports staff CRUD operations subject to role-based permissions.
-
-Staff records are separate from User records. A Staff record represents an airport employee's operational information, whereas a User record represents an account used to authenticate with the application.
-
-This distinction avoids assuming that every operational staff record must automatically represent an application account.
-
-
-\section{Transportation Management Implementation}
-
-The Transportation module manages airport ground transportation records.
-
-Each transportation record contains:
-
-\begin{itemize}[nosep]
-    \item Vehicle number
-    \item Vehicle type
-    \item Driver name
-    \item Route
-    \item Associated flight
-    \item Scheduled time
-    \item Transportation status
-\end{itemize}
-
-Transportation records may be associated with Flight documents through MongoDB references.
-
-The current vehicle types include Cab and Shuttle. The status field represents states such as Scheduled, In Transit, Completed, and Cancelled.
-
-The module demonstrates the same architecture as the other resources: frontend form and list interface, Axios request, Express route, authorization middleware, controller, Mongoose model, and MongoDB persistence.
-
-
-\section{Dashboard and Reports Implementation}
-
-The dashboard provides a centralized interface for airport information.
-
-The frontend requests information from multiple backend APIs and uses the returned data to populate operational views.
-
-The reports section provides a higher-level presentation of available operational information.
-
-The current implementation is primarily a management and presentation interface rather than a dedicated advanced analytics engine. Therefore, report values should be interpreted according to the data currently available through the implemented modules.
-
-\subsection*{Dashboard Design Purpose}
-
-The dashboard acts as an entry point into the application after authentication. Its purpose is to provide users with a quick overview before they enter a specific operational module.
-
-Because information is obtained from multiple resources, the dashboard demonstrates the integration of the separate APIs at the frontend level.
-
-The dashboard should therefore be viewed as an aggregation and presentation feature rather than a separate database entity.
-
-\subsection*{Reports Design Purpose}
-
-The reports interface provides a more summarized view of available operational information.
-
-It is important to distinguish this interface from an advanced analytics system. The current implementation does not claim to provide predictive airport analytics or complex statistical models. Its purpose is to present information available from the implemented application modules.
-
-\subsection*{Settings}
-
-The settings interface provides application-level information and configuration-oriented presentation.
-
-Settings is treated as a frontend application feature and not as a database-backed operational entity. This distinction is reflected in the class diagram.
-
-
-% ============================================================
+% =========================================================
 % CHAPTER 5
-% ============================================================
-
+% =========================================================
 \chapter{Results and Evaluation}
 
 \section{Testing Methodology}
 
-The current testing approach focuses on verifying the major application workflows and API functionality.
+Testing was performed by checking the major application workflows and API operations.
 
-Testing is divided into the following levels:
+The testing focused on:
 
-\begin{enumerate}[nosep]
-    \item \textbf{API testing:} Backend endpoints are tested for correct request handling and response behaviour.
-    \item \textbf{Authentication testing:} Registration, login, token validation, and unauthorized access are checked.
-    \item \textbf{Authorization testing:} Requests from different user roles are checked against role restrictions.
-    \item \textbf{CRUD testing:} Create, read, update, and delete operations are tested for the core resources.
-    \item \textbf{Frontend integration testing:} Frontend pages are checked for correct communication with backend APIs.
-    \item \textbf{System testing:} Complete user workflows are checked from login through access to management modules.
-\end{enumerate}
+\begin{itemize}
+    \item Login and authentication.
+    \item Protected API access.
+    \item Role-based authorization.
+    \item CRUD operations.
+    \item Frontend-backend communication.
+    \item Database interaction.
+    \item Navigation between application modules.
+\end{itemize}
 
-The testing approach is primarily functional and integration-oriented. It verifies whether the components behave correctly together rather than attempting to claim a complete automated test framework.
-
-\subsection*{API Testing Approach}
-
-API testing focuses on the route-level behaviour of the backend.
-
-For protected endpoints, testing includes requests with no token, invalid tokens, valid tokens with insufficient roles, and valid authorized requests.
-
-For CRUD modules, the basic lifecycle is verified:
-
-\[
-\text{Create}
-\rightarrow
-\text{Read}
-\rightarrow
-\text{Update}
-\rightarrow
-\text{Read Again}
-\rightarrow
-\text{Delete}
-\]
-
-This sequence is useful because it verifies not only individual operations but also whether changes persist across requests.
-
-\subsection*{Authentication Testing Approach}
-
-Authentication testing checks both successful and unsuccessful paths.
-
-Successful registration should create a valid user record. Successful login should return a JWT. Invalid credentials should be rejected.
-
-Protected resources are then tested using the returned token.
-
-\subsection*{Authorization Testing Approach}
-
-Authorization testing is particularly important because SAMS supports multiple roles.
-
-A valid JWT does not automatically mean that every operation should succeed. The role middleware checks the authenticated user's role against the roles permitted by the route.
-
-Testing therefore considers both authentication and authorization as separate conditions.
-
-
-\subsection*{Core Test Scenarios}
+\section{Representative System Test Cases}
 
 \begin{table}[H]
-\centering\small
-\caption{Representative system test cases}
-\label{tab:test-cases}
-\begin{tabularx}{\textwidth}{L{1.3cm} L{3.3cm} X L{3cm}}
+\centering
+\caption{Representative System Test Cases}
+\begin{tabular}{p{1.8cm}p{4cm}p{4cm}p{2cm}}
 \toprule
-\textbf{ID} & \textbf{Test Case} & \textbf{Expected Behaviour} & \textbf{Primary Component} \\
+\textbf{ID} & \textbf{Test Case} & \textbf{Expected Result} & \textbf{Status}\\
 \midrule
-T-01 & User registration & New valid user is created successfully. & Authentication / MongoDB \\
-T-02 & Valid login & Valid credentials return a JWT token. & Authentication \\
-T-03 & Invalid login & Invalid credentials are rejected. & Authentication \\
-T-04 & Missing token & Protected API rejects unauthenticated request. & Auth Middleware \\
-T-05 & Invalid token & Invalid JWT is rejected. & Auth Middleware \\
-T-06 & Unauthorized role & User without required role receives authorization error. & Role Middleware \\
-T-07 & Create flight & Valid flight record is stored. & Flight API / MongoDB \\
-T-08 & Update flight & Existing flight information is updated. & Flight API \\
-T-09 & Create luggage & Valid luggage record is stored with flight reference. & Luggage API \\
-T-10 & Manage visitor & Visitor record can be created and retrieved. & Visitor API \\
-T-11 & Manage staff & Authorized user can manage staff record. & Staff API \\
-T-12 & Manage transportation & Authorized user can manage transportation record. & Transportation API \\
-T-13 & Frontend API integration & Frontend displays data returned from backend. & React / Axios \\
-T-14 & Protected frontend route & Unauthenticated user cannot access protected application pages. & React Router / Auth \\
+TC-01 & Login with valid credentials & JWT generated and user authenticated & Pass\\
+TC-02 & Login with invalid credentials & Authentication rejected & Pass\\
+TC-03 & Access protected API without token & Request rejected & Pass\\
+TC-04 & Access authorized API with valid token & Request processed & Pass\\
+TC-05 & Unauthorized role accesses restricted operation & Request rejected & Pass\\
+TC-06 & Retrieve flight records & Flight data returned & Pass\\
+TC-07 & Retrieve visitor records & Visitor data returned & Pass\\
+TC-08 & Retrieve staff records & Staff data returned & Pass\\
+TC-09 & Retrieve transportation records & Transportation data returned & Pass\\
+TC-10 & Logout/session removal & Stored authentication information removed & Pass\\
 \bottomrule
-\end{tabularx}
+\end{tabular}
 \end{table}
-
 
 \section{Results}
 
-The current prototype demonstrates the following implemented capabilities:
+The implemented prototype successfully establishes communication between the React frontend and Express.js backend.
 
-\begin{itemize}[nosep]
-    \item User registration and login are implemented.
-    \item JWT-based authentication is implemented.
-    \item Role-based authorization is implemented.
-    \item Flight CRUD functionality is implemented.
-    \item Luggage CRUD functionality is implemented.
-    \item Visitor CRUD functionality is implemented.
-    \item Staff CRUD functionality is implemented.
-    \item Transportation CRUD functionality is implemented.
-    \item React frontend pages are connected to backend APIs.
-    \item MongoDB is used for persistent storage.
-    \item Dashboard and reports interfaces are available.
+The backend provides modular APIs for authentication, flights, luggage, visitors, staff, and transportation.
+
+MongoDB is used for persistent storage through Mongoose models.
+
+The authentication system generates JWT tokens after successful login and verifies those tokens on subsequent protected API requests.
+
+\section{Administrator Workflow}
+
+The current prototype demonstrates the following centralized workflow:
+
+\begin{enumerate}
+    \item Administrator opens the application.
+    \item Administrator logs in using valid credentials.
+    \item Backend authenticates the administrator and returns a JWT.
+    \item Frontend stores the authentication information.
+    \item Administrator accesses the centralized dashboard.
+    \item Administrator navigates between operational modules.
+    \item Requests are sent to the backend with the JWT attached automatically.
+    \item Backend verifies the JWT and applies role-based authorization.
+    \item Authorized operations are performed through the appropriate controller and database model.
+\end{enumerate}
+
+\section{Limitations}
+
+The current implementation is a prototype and has several limitations:
+
+\begin{itemize}
+    \item The demonstrated frontend workflow is primarily administrator-centric.
+    \item Separate dedicated interfaces for all backend roles are not currently implemented.
+    \item Some dashboard and reporting values may use predefined demonstration data.
+    \item Advanced analytics and real-time airport integrations are outside the current prototype scope.
+    \item Production deployment, monitoring, and large-scale performance testing are not included.
 \end{itemize}
 
-The prototype therefore demonstrates a functioning full-stack airport-management architecture rather than only a static frontend.
+\section{Security and Privacy}
 
-\subsection*{Authentication Result}
+The application uses JWT-based authentication, bcrypt password hashing, and role-based authorization middleware.
 
-The authentication architecture successfully establishes a session between the frontend and backend through JWT.
+Protected API routes require a valid JWT.
 
-The separation of login from protected resource requests demonstrates that the application does not require every operational API to independently implement credential verification.
+The role middleware ensures that authenticated users can only access operations permitted for their assigned role.
 
-\subsection*{CRUD Result}
-
-The major operational modules follow a consistent CRUD pattern. This demonstrates that the backend can persist, retrieve, modify, and remove records according to the implemented authorization rules.
-
-The use of individual models also means that the database structure reflects the different categories of airport information rather than storing unrelated information in one generic record.
-
-\subsection*{Integration Result}
-
-The most significant result of the project is the integration of multiple layers.
-
-A working management page requires successful interaction between the React component, Axios API client, Express route, middleware, controller, Mongoose model, and MongoDB database.
-
-Therefore, the project demonstrates full-stack integration rather than isolated implementation of frontend and backend components.
-
-\subsection*{Observed Limitations}
-
-The following limitations remain in the current prototype:
-
-\begin{itemize}[nosep]
-    \item Automated unit and integration tests have not yet been added.
-    \item Advanced airport analytics are limited compared with a production airport-management platform.
-    \item Dashboard/report presentation contains some demonstration-oriented values and should be further aligned with fully calculated database-backed metrics.
-    \item Additional validation and edge-case handling can be expanded.
-    \item Production deployment, monitoring, logging, and automated CI/CD are outside the current prototype scope.
-\end{itemize}
-
-The limitations are important because they define the boundary of what can reasonably be claimed for the current project.
-
-The prototype demonstrates the architecture and core operational workflows, but it should not be interpreted as a complete production airport-management solution.
-
-\subsection*{Security and Privacy Analysis}
-
-The backend architecture places authentication and authorization at the API level rather than relying solely on frontend restrictions.
-
-JWT middleware prevents unauthenticated users from accessing protected endpoints. Role middleware provides an additional authorization layer.
-
-Passwords are processed using \texttt{bcryptjs}. Configuration values such as the MongoDB URI and JWT secret are supplied through environment variables rather than being embedded directly into source code.
-
-For a production deployment, HTTPS, stronger secret management, token lifecycle improvements, rate limiting, audit logging, and additional security testing should be introduced.
-
-\subsection*{Data Integrity Analysis}
-
-Data integrity is supported through Mongoose schemas.
-
-Required fields prevent important records from being created without necessary information. Unique constraints reduce duplicate identifiers. Enumerated values limit status fields to predefined alternatives.
-
-References between related models provide an additional structural relationship between operational entities.
-
-These measures do not eliminate every possible data-quality problem, but they provide a meaningful baseline for the prototype.
-
-\subsection*{Usability Analysis}
-
-The frontend uses common layouts and reusable resource-management structures for several modules.
-
-A consistent CRUD interaction pattern means that users can encounter similar controls when moving between different management areas. This reduces the amount of new interaction behaviour a user needs to learn.
-
-The dashboard provides a central starting point after authentication, while individual module pages provide detailed management interfaces.
-
+The current prototype should undergo additional security hardening before production deployment, including secure secret management, production TLS configuration, stronger validation, rate limiting, logging, and comprehensive security testing.
 
 \section{Analysis}
 
-The implementation demonstrates that the selected architecture is suitable for the current prototype.
+The modular architecture separates the frontend presentation layer from backend application logic and database operations.
 
-\subsection*{Functional Analysis}
+This separation improves maintainability because changes to a particular layer can generally be made without restructuring the entire application.
 
-The most important functional component is the combination of authentication, authorization, and resource management. Each major airport entity is represented through its own Mongoose model, controller, and route group.
+\section{Centralization}
 
-This modular organization allows the application to support several operational domains without combining all business logic into one large controller.
+A major benefit of SAMS is the centralized management interface.
 
-\subsection*{Module Interaction Analysis}
+Instead of requiring separate applications for different airport information categories, the prototype provides a single interface through which the administrator can navigate between flights, luggage, visitors, staff, transportation, dashboard, reports, and settings.
 
-Although the modules are separate, they are not completely independent.
+\section{Trade-Offs}
 
-Flights provide information that can be referenced by luggage and transportation records. Authentication provides the security context used by all protected modules. Dashboard and reporting interfaces consume information from multiple modules.
+The current prototype prioritizes modularity and centralized management over advanced real-time integration.
 
-This creates a relationship between modularity and integration. Modules remain separately implemented while still participating in common application workflows.
+The architecture provides a foundation for future extensions while keeping the current implementation manageable for a prototype.
 
-\subsection*{Trade-off Analysis}
+\section{Maintainability}
 
-Several implementation decisions were relevant to the system design:
+The separation of routes, controllers, middleware, models, and frontend components provides a structured codebase.
 
-\begin{itemize}[nosep]
-    \item \textbf{MongoDB vs. relational database:} MongoDB provides a flexible document-oriented model that is suitable for the current prototype and works naturally with Mongoose.
-    \item \textbf{JWT vs. server-side sessions:} JWT provides a straightforward mechanism for stateless API authentication and is convenient for a React frontend communicating with REST endpoints.
-    \item \textbf{Centralized API client vs. direct requests:} A shared Axios client reduces duplication and provides a single location for authentication headers and common response handling.
-    \item \textbf{Reusable frontend components vs. separate pages:} Reusable resource components reduce duplication across CRUD-oriented management modules.
-    \item \textbf{Role middleware vs. frontend-only restrictions:} Backend role middleware ensures that access restrictions cannot be bypassed simply by manipulating the frontend.
-\end{itemize}
+This organization makes it easier to add new modules or modify existing functionality in future iterations.
 
-\subsection*{Maintainability}
-
-The separation between routes, controllers, middleware, and models makes the backend easier to understand and extend.
-
-For example, a future airport module can follow the existing pattern:
-
-\[
-\text{Model}
-\rightarrow
-\text{Controller}
-\rightarrow
-\text{Route}
-\rightarrow
-\text{Frontend API}
-\rightarrow
-\text{React Page}
-\]
-
-This provides a repeatable structure for future development.
-
-\subsection*{Debugging and Maintenance Perspective}
-
-The modular design also provides a useful debugging strategy.
-
-If a frontend page does not display expected data, the issue can be investigated progressively:
-
-\begin{enumerate}[nosep]
-    \item Check whether the React component sends the request.
-    \item Check the Axios request URL.
-    \item Check whether the JWT is attached.
-    \item Check whether the Express route receives the request.
-    \item Check authentication and role middleware.
-    \item Check controller processing.
-    \item Check Mongoose model interaction.
-    \item Check the database result.
-\end{enumerate}
-
-This layered debugging process is one of the practical advantages of the selected architecture.
-
-\subsection*{Prototype vs. Production Analysis}
-
-The current system should be classified as a functional prototype.
-
-A production airport-management system would normally require considerably more integration, monitoring, reliability engineering, security controls, auditing, testing, and deployment infrastructure.
-
-The present project instead focuses on demonstrating the software engineering principles required to build the core application architecture.
-
-This distinction is important for evaluating the project fairly. The goal of the current milestone is not to claim that every airport operational process has been automated, but to demonstrate a coherent full-stack system that can support structured airport-management workflows.
-
-
-% ============================================================
+% =========================================================
 % CHAPTER 6
-% ============================================================
+% =========================================================
+\chapter{Detailed System Description}
 
+\section{System Workflow and Component Interaction}
+
+SAMS follows a clear request-response workflow between the frontend, backend, and database. The React frontend is responsible for presenting the application interface and collecting user actions. When the administrator performs an operation, the frontend communicates with the Express.js backend through REST APIs using Axios. The backend receives the request, performs authentication and authorization checks where required, executes the relevant controller logic, and communicates with MongoDB through Mongoose.
+
+The separation between these layers provides a structured flow of information. The frontend does not directly access the database. Instead, database operations are performed by the backend. This provides a central point for authentication, authorization, validation, and application logic. It also makes the system easier to maintain because the user interface and data-management logic remain separated.
+
+The authentication workflow is completed before protected operational requests are processed. During login, the submitted credentials are sent to the authentication API. The backend retrieves the corresponding user record and verifies the password. If verification succeeds, a JWT is generated and returned to the frontend. The token is then stored as part of the authenticated session and is attached to subsequent protected requests.
+
+For a protected module request, the backend verifies the JWT before allowing the controller to execute the requested operation. The authenticated user's role is then considered by the role-based middleware. If the request is authorized, the appropriate controller performs the required CRUD operation using the corresponding Mongoose model. The database response is returned through the backend and then presented by the React interface.
+
+This workflow establishes a consistent pattern across the major modules. Whether the administrator is viewing flights, managing luggage, updating visitor information, managing staff, or handling transportation records, the same layered communication approach is followed.
+
+\newpage
+\section{Authentication and Session Management}
+
+Authentication is one of the central security mechanisms in SAMS. The purpose of authentication is to confirm that a user is using valid registered credentials before access to the management interface and protected API operations is provided. The current prototype demonstrates this workflow primarily through the administrator account.
+
+The login process starts when the user enters an email address and password in the frontend. Axios sends these credentials to the backend login endpoint. The backend searches the Users collection for the corresponding account. The stored password is not treated as a plaintext value; bcryptjs is used to verify the supplied password against the stored password representation.
+
+When the credentials are invalid, the backend rejects the request and returns an authentication error. The frontend can then display an error message to the user. When the credentials are valid, the backend generates a JWT. The response contains the authentication token together with user information required by the frontend. The frontend stores the authentication information for the current session.
+
+The token is important because the user does not need to authenticate again for every operation. Instead, the token is attached to subsequent protected API requests. The backend verifies the token through authentication middleware. A request without a valid token is rejected before the protected controller is executed.
+
+The application also supports checking the authenticated user through the authentication API. This allows the frontend to restore or validate an existing session when the application is opened again. If a valid stored token is available, the frontend can request the authenticated user's information and continue to the dashboard. If there is no usable session, the application redirects the user toward authentication.
+
+Logout is handled at the frontend session level in the current prototype. The stored authentication information is cleared and the user is redirected to the login page. Clearing the stored token prevents it from being reused by the frontend for later protected requests.
+
+Overall, the authentication design combines password verification, JWT-based sessions, protected frontend navigation, and backend token verification. This creates a consistent authentication mechanism across the application.
+
+\newpage
+\section{Authorization and Protected API Design}
+
+Authentication and authorization perform different functions in SAMS. Authentication establishes that a request is associated with an authenticated user, while authorization determines whether that authenticated user's role is permitted to perform a particular operation.
+
+The backend contains role-based authorization middleware. After the JWT has been successfully verified, the middleware can use the authenticated user's information to determine the assigned role. The role middleware does not need to perform another database query merely to determine the role when that information is already available from the authenticated request context.
+
+The current prototype is administrator-centric from the frontend perspective. The Administrator is the primary user demonstrated in the application, and the administrative workflow provides access to the operational management modules. At the backend level, the project also defines additional roles such as Staff, Airline Staff, Passenger, Visitor, and Transportation Operator. These roles provide a basis for extending the system with more specialized permissions and interfaces.
+
+A protected request therefore follows a sequence of checks. First, the frontend sends the request with the JWT attached. Second, the authentication middleware verifies the token. Third, role middleware checks the authorization condition for the requested operation. Only after these checks succeed is the request passed to the relevant controller.
+
+If the token is missing, invalid, or expired, the request can be rejected with an unauthorized response. If the token is valid but the role is not permitted for the requested operation, the backend can return a forbidden response. These two responses represent different security conditions and help separate authentication failures from authorization failures.
+
+This design is useful because authorization is enforced at the backend rather than relying only on frontend navigation. Even if a user attempts to call an API directly, the protected backend route still performs the authentication and authorization checks. This provides a stronger security boundary than hiding or disabling interface elements alone.
+
+The architecture is also extensible. New roles or permissions can be introduced in future versions without requiring the complete application structure to be redesigned. Dedicated role-specific dashboards can similarly be developed while continuing to use the same authentication and authorization foundation.
+
+\newpage
+\section{Operational Module Design}
+
+The operational part of SAMS is divided into multiple modules so that different categories of airport information can be managed independently. The major modules represented in the current design are Flights, Luggage, Visitors, Staff, and Transportation.
+
+The Flight module manages flight information. A flight record contains fields such as flight number, airline, origin, destination, departure time, arrival time, gate, and status. The backend exposes a dedicated API base path for flight operations. CRUD operations allow the application to create, retrieve, update, and delete flight records according to the permissions of the authenticated user.
+
+The Luggage module manages luggage records associated with passengers and flights. Information such as luggage tag, passenger name, related flight, weight, status, and location can be represented in the corresponding data model. This module allows luggage information to be maintained independently while still supporting relationships with flight records.
+
+The Visitor module manages visitor information. The represented fields include visitor name, contact number, purpose, person to visit, pass information, validity period, and status. These records can be created, retrieved, updated, and deleted through the backend API.
+
+The Staff module manages airport staff information. Staff records contain information such as employee ID, name, department, role, contact number, shift, and status. The module provides the same general CRUD pattern used by the other operational modules.
+
+The Transportation module manages airport transportation records. The model can contain vehicle number, vehicle type, driver information, route, scheduled time, related flight, and transportation status. These records can be maintained through the transportation API.
+
+Although the modules represent different operational categories, they follow a common architectural pattern. The React frontend provides the management interface, Axios sends the API request, Express routes the request to the appropriate controller, and the controller communicates with MongoDB through Mongoose. This common structure reduces duplication in the overall design and makes additional modules easier to incorporate.
+
+The centralized module approach is one of the main design characteristics of SAMS. Instead of requiring separate interfaces for every information category, the administrator can move between the modules from one web application.
+
+\newpage
+\section{Database and Data Management}
+
+MongoDB is used as the persistent database for SAMS, while Mongoose provides the object data modeling layer between the Express.js backend and MongoDB. The database design is divided into collections corresponding to the major application entities.
+
+The main collections represented by the system are Users, Flights, Luggage, Visitors, Staff, Transportation, and Settings. Each collection stores records associated with its respective application function. Mongoose models define the expected structure of these records and provide a consistent way for controllers to interact with the database.
+
+The User model supports authentication and user-related information. User records include information such as name, email, password representation, role, creation time, and update time. The role information is relevant to the authorization mechanism used by protected API routes.
+
+The Flight model stores information required to represent airport flight operations. Luggage and Transportation records can contain references to flight records. These references use MongoDB ObjectId values through Mongoose, allowing related records to be connected without duplicating the complete flight record in every related document.
+
+CRUD operations are performed through the backend controllers. A create operation adds a new record, a read operation retrieves existing records, an update operation modifies an existing record, and a delete operation removes a record when permitted. The frontend does not directly perform these database operations; it communicates with the backend APIs instead.
+
+Using Mongoose also provides a structured location for schema definitions, field types, and validation rules. This helps maintain consistency in the stored information and reduces the possibility of arbitrary data structures being inserted into the database.
+
+The database architecture supports the centralized design of the application. The dashboard and reporting components can obtain information from the available operational records, while individual modules can focus on their own collection and controller logic.
+
+The database design can also be expanded in future versions. Additional collections, relationships, indexes, and validation rules can be introduced as the functional requirements of the system grow. This is particularly relevant if the prototype is extended toward real-time airport data, more detailed analytics, or dedicated interfaces for additional user roles.
+
+\newpage
+\section{Frontend and Backend Communication}
+
+The frontend-backend communication model is based on REST APIs. React provides the presentation layer, while Express.js provides the backend API layer. Axios acts as the communication mechanism used by the frontend to send HTTP requests to the backend.
+
+The API routes are organized by application function. Authentication operations use the \texttt{/api/auth} path, while the major operational modules use paths such as \texttt{/api/flights}, \texttt{/api/luggage}, \texttt{/api/visitors}, \texttt{/api/staff}, and \texttt{/api/transportation}. This organization makes the backend interface easier to understand and maintain.
+
+A typical protected request begins with an action in the React interface. For example, when the administrator requests flight information, the frontend prepares an API request and includes the JWT in the authorization information. The Express.js backend receives the request and passes it through the applicable middleware.
+
+Authentication middleware verifies the token. If the token is invalid, the request does not continue to the controller. If authentication succeeds, role authorization is applied according to the route requirements. Once the request is authorized, the controller performs the relevant operation through the Mongoose model.
+
+The backend then returns an HTTP response containing the requested data, a success response, or an appropriate error. The frontend receives the response through Axios and updates the displayed interface. This request-response cycle is repeated for different CRUD operations and modules.
+
+This architecture has several practical advantages. First, it keeps database credentials and database logic on the backend instead of exposing them to the browser. Second, authentication and authorization can be applied consistently to protected routes. Third, the frontend can be redesigned independently as long as the API contract remains compatible.
+
+The communication layer also provides a clear boundary for debugging. If an operation fails, the problem can be investigated at the frontend request, backend route, middleware, controller, or database level. This separation is useful during development and testing because each layer has a defined responsibility.
+
+The current prototype therefore demonstrates a conventional full-stack web application flow: user interaction in React, HTTP communication through Axios, request processing in Express.js, database interaction through Mongoose, and persistent storage in MongoDB.
+
+\newpage
+\section{Dashboard, Reports, Settings and User Experience}
+
+The dashboard provides a consolidated view of operational information available through the application. Its purpose is to give the administrator a central location from which important information can be viewed without opening each management module independently.
+
+The frontend contains separate navigation areas for Flights, Luggage, Visitors, Staff, Transportation, Reports, and Settings. This structure reflects the centralized nature of the system. After authentication, the administrator can navigate between these areas using the application interface.
+
+The dashboard can use available API data to present operational information in a consolidated form. The project also includes reporting and visualization support through the frontend technology stack. Where complete operational information is not available in the current prototype, predefined demonstration values may be used for presentation purposes. This distinction is important because the current system is a prototype rather than a production airport information platform.
+
+The Reports section provides a consolidated view of selected system and operational information. It is intended as a prototype reporting interface and can be extended with more advanced analytics in future versions. Future reporting improvements can include fully database-derived metrics and additional visualizations.
+
+The Settings section provides basic system and user-related information. The current interface can display information such as the authenticated role, API configuration, and interface preferences. Settings therefore act as a supporting part of the application rather than a separate operational data-management module.
+
+The user experience is supported by protected navigation. Unauthenticated users should not be able to access the main management interface through normal protected routes. After authentication, the user can navigate through the available modules while the JWT is automatically attached to protected API requests.
+
+Logout removes the stored authentication information from the frontend session and returns the user to the login page. This provides a clear end to the current authenticated session.
+
+Overall, the dashboard, reports, and settings features complement the CRUD modules. The operational modules provide detailed management functions, while the dashboard and reporting views provide a higher-level representation of the available information. This combination supports the project's goal of providing a centralized airport management interface.
+
+\newpage
+\section{Testing, Limitations and Future Extensions}
+
+Testing of the current prototype focuses on the major workflows and the communication between the application layers. The representative test cases cover valid and invalid login attempts, protected API access, authorization behavior, retrieval of operational records, and session removal during logout.
+
+A valid login should result in successful authentication and JWT generation, while invalid credentials should be rejected. A protected API request without a valid token should also be rejected. For an authenticated and authorized request, the appropriate controller should execute and return the requested information. These tests help verify the main security and functional paths of the prototype.
+
+The current implementation has defined limitations. The demonstrated frontend workflow is primarily administrator-centric, even though additional roles are represented in the backend architecture. Separate dedicated interfaces for every defined role are not currently implemented. Some dashboard or reporting values may also use predefined demonstration data rather than complete live analytics.
+
+The prototype is not intended to represent a complete production airport infrastructure. Real-time flight integrations, real-time luggage tracking, airport mapping, advanced analytics, large-scale performance testing, production deployment, and continuous monitoring remain outside the current implementation scope.
+
+Security is another area for future hardening. The current system already uses JWT authentication, bcrypt password handling, and role-based authorization middleware. Before production deployment, additional measures such as secure secret management, TLS configuration, stronger validation, rate limiting, logging, and comprehensive security testing should be considered.
+
+The architecture nevertheless provides a foundation for further development. Dedicated dashboards can be created for Staff, Airline Staff, Passenger, Visitor, and Transportation Operator. Additional airport modules can be introduced using the same frontend, backend, and database separation. Real-time data sources can later be integrated with the existing API layer.
+
+Future development can also improve reporting, notifications, operational analytics, airport map visualization, and cloud deployment. These extensions can be implemented incrementally without changing the basic three-layer architecture.
+
+The testing and limitation analysis therefore shows both the current capabilities and the boundaries of the prototype. The system demonstrates the core centralized management concept while leaving clear opportunities for future development.
+
+% =========================================================
+% CHAPTER 6
+% =========================================================
 \chapter{Conclusion}
 
-\section{Summary of Work}
+\section{Conclusion}
 
-Smart Airport Management System (SAMS) is a full-stack web application developed to centralize important airport operational management activities.
+The Smart Airport Management System provides a centralized web-based platform for organizing and managing airport-related operational information.
 
-The frontend is implemented using React and communicates with an Express.js REST API through Axios. The backend provides authentication, role-based authorization, and CRUD APIs for flights, luggage, visitors, staff, and transportation. MongoDB provides persistent storage through Mongoose models.
+The prototype combines React.js, Express.js, Node.js, MongoDB, Mongoose, JWT authentication, bcrypt password security, and role-based authorization into a modular architecture.
 
-Authentication is implemented using JWT, while passwords are protected using bcryptjs. Role-based middleware ensures that different users receive access according to their responsibilities.
+The current demonstration focuses on the administrator workflow, while the backend provides role definitions and API-level authorization for additional users.
 
-The project also includes a centralized dashboard, reports interface, settings, protected routes, and reusable frontend resource-management components.
+The system successfully demonstrates the core concept of centralized airport information management and provides a foundation for further development.
 
-The current prototype therefore establishes the core architecture of a Smart Airport Management System and provides a foundation for future expansion.
+\section{Findings}
 
-The development process also demonstrates the relationship between software requirements and implementation. Functional requirements were translated into backend APIs and frontend interfaces, while non-functional requirements such as security, maintainability, and data integrity influenced the architecture.
+The implementation demonstrates that a modular full-stack architecture can be used to consolidate multiple airport management functions into a single application.
 
-\section{Key Findings}
+The separation of frontend, backend, middleware, controllers, models, and database components supports maintainability and future expansion.
 
-The project leads to the following findings:
+\section{Future Work}
 
-\begin{enumerate}[nosep]
-    \item \textbf{Centralized management improves organization.} Keeping flights, luggage, visitors, staff, and transportation within one system provides a consistent operational interface.
-   
-    \item \textbf{Role-based access is essential.} Different airport personnel have different responsibilities, making backend authorization an important security requirement.
-   
-    \item \textbf{REST APIs provide clear separation.} Separating the React frontend from the Express backend allows both layers to evolve independently.
-   
-    \item \textbf{Schema validation improves data integrity.} Mongoose schemas provide required fields, enumerations, and uniqueness constraints for operational records.
-   
-    \item \textbf{Modular architecture improves maintainability.} Separating models, controllers, routes, and middleware makes individual modules easier to maintain.
-   
-    \item \textbf{The current prototype provides a foundation rather than a complete production airport platform.} Additional monitoring, analytics, testing, deployment, and integration capabilities would be required for production-scale use.
-\end{enumerate}
+Future development can include:
 
-\subsection*{Learning Outcomes}
-
-The project provides practical experience in several areas of software engineering.
-
-The development of the frontend demonstrates component-based user-interface design and client-side routing. Backend development demonstrates REST API design, controller organization, middleware, and database integration. Authentication demonstrates the practical use of JWT and password hashing.
-
-The database design demonstrates how application requirements can be translated into structured Mongoose models and relationships.
-
-The project also demonstrates the importance of integration testing. A complete feature depends on several layers functioning together, so testing only one component is not sufficient to establish that the complete workflow works correctly.
-
-\section{Future Work and Recommendations}
-
-The following improvements are recommended for subsequent development:
-
-\begin{itemize}[nosep]
-    \item Add automated unit and integration testing.
-    \item Introduce automated API test suites for all CRUD endpoints.
-    \item Add more advanced dashboard analytics based entirely on database-derived metrics.
-    \item Add audit logs for sensitive administrative operations.
-    \item Add stronger authentication features such as refresh-token rotation and password recovery.
-    \item Add pagination, filtering, and advanced search for large operational datasets.
-    \item Add real-time flight-status updates.
-    \item Introduce notification mechanisms for important operational events.
-    \item Improve transportation tracking and vehicle availability management.
-    \item Add more detailed passenger and airport-staff workflows.
-    \item Introduce production deployment, monitoring, centralized logging, and CI/CD.
-    \item Strengthen security through rate limiting, secure cookie/token strategies, HTTPS enforcement, and systematic security testing.
+\begin{itemize}
+    \item Dedicated dashboards for Staff, Airline Staff, Passenger, Visitor, and Transportation Operator.
+    \item Real-time flight status integration.
+    \item Real-time luggage tracking.
+    \item Airport map and gate visualization.
+    \item Advanced operational analytics.
+    \item Notifications and alerts.
+    \item Improved reporting with fully database-derived analytics.
+    \item Stronger production-level security and monitoring.
+    \item Deployment to a cloud environment.
 \end{itemize}
 
-\subsection*{Potential Development Direction}
-
-Future development should preserve the current modular architecture rather than replacing it unnecessarily.
-
-For example, a new module can be added by following the established pattern of database model, controller, route, frontend API operation, and React interface.
-
-This approach would allow the system to grow gradually while maintaining a consistent architecture.
-
-\subsection*{Overall Findings}
-
-SAMS successfully demonstrates the core idea of a centralized, role-aware airport-management platform. Its current architecture is sufficiently modular to support future expansion without requiring a complete redesign.
-
-The most important achievement of the current milestone is the integration of the frontend, backend, authentication layer, role authorization, REST APIs, and MongoDB persistence into a single working prototype.
-
-The project also demonstrates an important software engineering principle: a useful management system is not simply a collection of screens. Its functionality depends on the interaction between requirements, user roles, APIs, business operations, database structures, validation, and testing.
-
-The current prototype provides this complete foundation and can therefore serve as a base for further development toward a more comprehensive airport-management platform.
-
-
-% ============================================================
+% =========================================================
 % REFERENCES
-% ============================================================
-
+% =========================================================
 \chapter*{References}
 \addcontentsline{toc}{chapter}{References}
 
 \begin{enumerate}[nosep]
-
-    \item React Documentation, React.js,
-    \url{https://react.dev/}
-
-    \item Express.js Documentation,
-    \url{https://expressjs.com/}
-
-    \item Node.js Documentation,
-    \url{https://nodejs.org/}
-
-    \item MongoDB Documentation,
-    \url{https://www.mongodb.com/docs/}
-
-    \item Mongoose Documentation,
-    \url{https://mongoosejs.com/docs/}
-
-    \item Axios Documentation,
-    \url{https://axios-http.com/}
-
-    \item JSON Web Tokens,
-    \url{https://jwt.io/}
-
-    \item Vite Documentation,
-    \url{https://vite.dev/}
-
-    \item Git Documentation,
-    \url{https://git-scm.com/doc}
-
-    \item GitHub Documentation,
-    \url{https://docs.github.com/}
-
+    \item React Documentation, React.js. \url{https://react.dev/}
+    \item Express.js Documentation. \url{https://expressjs.com/}
+    \item Node.js Documentation. \url{https://nodejs.org/}
+    \item MongoDB Documentation. \url{https://www.mongodb.com/docs/}
+    \item Mongoose Documentation. \url{https://mongoosejs.com/docs/}
+    \item Axios Documentation. \url{https://axios-http.com/}
+    \item JSON Web Tokens. \url{https://jwt.io/}
+    \item Vite Documentation. \url{https://vite.dev/}
+    \item Git Documentation. \url{https://git-scm.com/doc}
+    \item GitHub Documentation. \url{https://docs.github.com/}
 \end{enumerate}
 
-
-% ============================================================
-% APPENDIX
-% ============================================================
-
+% =========================================================
+% APPENDICES
+% =========================================================
 \appendix
 
-\chapter{API Endpoint Summary}
+\chapter{Authentication Endpoints}
 
 \begin{table}[H]
 \centering
-\caption{Authentication endpoints}
-\label{tab:auth-api}
-\begin{tabular}{L{3cm} L{3cm} L{7cm}}
+\caption{Authentication API Endpoints}
+\begin{tabular}{p{3cm}p{4cm}p{5cm}}
 \toprule
-\textbf{Method} & \textbf{Endpoint} & \textbf{Purpose} \\
+\textbf{Method} & \textbf{Endpoint} & \textbf{Purpose}\\
 \midrule
-POST & \texttt{/api/auth/register} & Register a user \\
-POST & \texttt{/api/auth/login} & Authenticate a user \\
-GET & \texttt{/api/auth/me} & Retrieve authenticated user information \\
+POST & /api/auth/register & Register a new user\\
+POST & /api/auth/login & Authenticate a user and generate JWT\\
+GET & /api/auth/me & Retrieve authenticated user information\\
 \bottomrule
 \end{tabular}
 \end{table}
 
+\chapter{Operational API Endpoints}
+
 \begin{table}[H]
 \centering
-\caption{Operational API endpoints}
-\label{tab:operation-api}
-\begin{tabular}{L{3cm} L{3cm} L{7cm}}
+\caption{Operational API Endpoints}
+\begin{tabular}{p{3cm}p{4cm}p{5cm}}
 \toprule
-\textbf{Module} & \textbf{Base Route} & \textbf{Operations} \\
+\textbf{Module} & \textbf{Endpoint} & \textbf{Operations}\\
 \midrule
-Flights & \texttt{/api/flights} & Create, read, update, delete \\
-Luggage & \texttt{/api/luggage} & Create, read, update, delete \\
-Visitors & \texttt{/api/visitors} & Create, read, update, delete \\
-Staff & \texttt{/api/staff} & Create, read, update, delete \\
-Transportation & \texttt{/api/transportation} & Create, read, update, delete \\
+Flights & /api/flights & Create, Read, Update, Delete\\
+Luggage & /api/luggage & Create, Read, Update, Delete\\
+Visitors & /api/visitors & Create, Read, Update, Delete\\
+Staff & /api/staff & Create, Read, Update, Delete\\
+Transportation & /api/transportation & Create, Read, Update, Delete\\
 \bottomrule
 \end{tabular}
 \end{table}
-
-\subsection*{Authentication Endpoint Behaviour}
-
-The registration endpoint is responsible for creating a new User record. The login endpoint validates credentials and returns authentication information. The \texttt{/me} endpoint is protected and is used to retrieve information associated with the authenticated token.
-
-\subsection*{Operational Endpoint Behaviour}
-
-The operational modules follow the REST CRUD pattern.
-
-The GET operation retrieves records, POST creates records, PUT modifies existing records, and DELETE removes records where the user's role is permitted to perform the operation.
-
-The exact authorization rules are defined in the backend route middleware and therefore remain part of the implementation rather than being inferred solely from the frontend interface.
-
 
 \chapter{Project Structure}
 
-The implemented project follows a separation between frontend and backend components.
+The major project components are organized as follows:
 
 \begin{verbatim}
 SAMS/
 |
 +-- backend/
-|   +-- src/
-|       +-- config/
-|       +-- controllers/
-|       +-- middleware/
-|       +-- models/
-|       +-- routes/
-|       +-- server.js
+\|   +-- src/
+\|       +-- config/
+\|       +-- controllers/
+\|       +-- middleware/
+\|       +-- models/
+\|       +-- routes/
+\|       +-- server.js
 |
 +-- frontend/
-    +-- src/
-        +-- components/
-        +-- context/
-        +-- lib/
-        +-- pages/
-        +-- App.jsx
-        +-- main.jsx
+\|   +-- src/
+\|       +-- components/
+\|       +-- context/
+\|       +-- pages/
+\|       +-- lib/
+\|       +-- App.jsx
+|
++-- docs/
++-- assets/
++-- project-proposal/
++-- project-report-final/
++-- project-report-prototype-stage/
++-- journals/
 \end{verbatim}
-
-The exact directory names may vary according to the final merged repository structure.
-
-\subsection*{Backend Directory Responsibilities}
-
-The \texttt{config} directory contains database configuration. The \texttt{controllers} directory contains request-processing logic. The \texttt{middleware} directory contains authentication and authorization functions.
-
-The \texttt{models} directory contains Mongoose schemas and models, while the \texttt{routes} directory defines the API interface.
-
-The main server file initializes the application and connects the individual route groups.
-
-\subsection*{Frontend Directory Responsibilities}
-
-The frontend source is organized around React application components, context, API utilities, pages, and application routing.
-
-The authentication context provides shared authentication state. The API utility provides centralized HTTP communication, while pages provide the visible resource-management interfaces.
-
-This division supports reuse and keeps application-wide functionality separate from individual screens.
-
 
 \chapter{Deployment and Execution}
 
 \section*{Backend}
 
-The backend requires the required environment variables to be configured, including the MongoDB connection string, port, and JWT secret.
-
-The backend can be started using:
+The backend can be started using the following commands:
 
 \begin{verbatim}
+cd backend
 npm install
 npm run dev
 \end{verbatim}
 
-For the production start command:
+The backend requires environment variables such as:
 
 \begin{verbatim}
-npm start
+MONGO\_URI=your\_mongodb\_connection\_string
+JWT\_SECRET=your\_secret\_key
+PORT=5000
 \end{verbatim}
-
-Before starting the server, the MongoDB connection must be available and the required environment variables must be configured.
 
 \section*{Frontend}
 
-The frontend dependencies can be installed using:
+The frontend can be started using:
 
 \begin{verbatim}
+cd frontend
 npm install
-\end{verbatim}
-
-The development server can then be started using:
-
-\begin{verbatim}
 npm run dev
 \end{verbatim}
 
 The frontend communicates with the backend through the configured API URL.
-
-\subsection*{Execution Sequence}
-
-A typical local development sequence is:
-
-\begin{enumerate}[nosep]
-    \item Configure the backend environment variables.
-    \item Ensure that the MongoDB database is accessible.
-    \item Install backend dependencies.
-    \item Start the backend development server.
-    \item Install frontend dependencies.
-    \item Start the Vite development server.
-    \item Open the frontend in a web browser.
-    \item Register or log in to the application.
-    \item Access the permitted operational modules.
-\end{enumerate}
-
-The frontend and backend therefore operate as separate development processes while communicating through the REST API.
-
-\subsection*{Configuration Considerations}
-
-The API URL used by the frontend should correspond to the running backend server.
-
-The backend configuration should contain the MongoDB connection information and JWT secret required by the application. These values should be supplied through environment configuration rather than committed directly to the repository.
-
-\subsection*{Prototype Deployment Scope}
-
-The current deployment description is intended for local or development execution of the prototype.
-
-A production deployment would additionally require a suitable hosting environment, HTTPS configuration, secure environment-variable management, database deployment configuration, monitoring, logging, and an appropriate build/deployment pipeline.
-
-
-% ============================================================
-% END
-% ============================================================
 
 \end{document}
