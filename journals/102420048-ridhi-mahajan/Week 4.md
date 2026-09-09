@@ -1,20 +1,39 @@
-# Week 4: Frontend, Backend, and Module Integration
+# Week 4 — Final Integration, Testing & Documentation
 
-## Connected Frontend with Backend and Integrated Team Modules
+### Diya Saini
 
-### Work Completed
+* Worked on the final backend corrections and improvements.
+* Verified authentication, protected routes, and API functionality.
+* Tested backend CRUD operations and MongoDB connectivity.
+* Resolved remaining backend issues found during final integration.
+* Prepared and finalized the **backend section of the project report**.
+* Worked on backend architecture and related diagrams.
+* Participated in final testing and project demonstration preparation.
 
-During the fourth week, the focus was on integrating the different parts of the **Smart Airport Management System (SAMS)** developed by the team members.
+### Ishika Jain
 
-The work completed included:
+* Completed the remaining backend modifications and debugging.
+* Tested routes, controllers, middleware, and database operations.
+* Verified that all major modules were functioning correctly through the backend.
+* Worked on final backend documentation and system architecture.
+* Prepared/refined **backend-related UML and DFD diagrams**.
+* Participated in final integration testing and review.
 
-* Connecting the frontend with the backend.
-* Integrating backend APIs with the frontend interfaces.
-* Connecting the Login and Dashboard interfaces with the required backend functionality.
-* Integrating the different project modules developed by team members into the main system.
-* Ensuring communication between the frontend, backend, and different operational modules.
-* Testing the integrated functionality of the system.
-* Resolving integration issues that occurred while combining the work of different team members.
-* Updating the shared GitHub repository with the integrated project code.
+### Ridhi Mahajan
 
-The main objective of this week was to combine the individual components developed by different team members and make them work together as a single **Smart Airport Management System.**
+* Worked on the final frontend improvements and UI corrections.
+* Tested the dashboard, navigation, forms, and management modules.
+* Fixed frontend issues identified during final integration.
+* Ensured the authenticated user could access the main application and modules correctly.
+* Prepared the **frontend-related sections** of the report.
+* Participated in final testing, diagram review, and project demonstration preparation.
+
+### Priyanka
+
+* Completed the final **frontend-backend integration**.
+* Resolved remaining API and data-flow issues across the modules.
+* Performed end-to-end testing of the integrated application.
+* Verified that frontend requests were correctly processed by the backend and stored in MongoDB.
+* Coordinated final changes between the frontend and backend team members.
+* Contributed to the final project report and integration documentation.
+* Participated in final review and demonstration preparation.
